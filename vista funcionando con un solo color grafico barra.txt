@@ -1,0 +1,154 @@
+vista funcionando con un solo color y etiqueta
+///
+
+<div>
+    <div class="ml-5 mr-5 inline-block">Semana
+        <select wire:model.defer="semanaEspecie" wire:change="KilosXSemanaCampo">
+            <option></option>
+            @for ($i = 1; $i < 53; $i++)
+                <option value="{{ $i }}">{{ $i }}</option>
+            @endfor
+        </select>
+    </div>
+    <div class="border-solid border-2 border-sky-500">
+    <canvas class="shadow-xl m-2" id="myChart" width="50" height="200"></canvas>
+    </div>
+</div>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: []
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        usePointStyle: true
+                    }
+                }
+            }
+        }
+    });
+
+    // Livewire listener
+   document.addEventListener('livewire:load', function() {
+    Livewire.on('updateChart', function(labels, datasets) {
+        // Limpiar datos antiguos
+        myChart.data.labels = [];
+        myChart.data.datasets = [];
+
+        // Llenar con nuevos datos
+        myChart.data.labels = labels;
+
+        // Agregar un solo conjunto de datos (barras)
+        myChart.data.datasets.push({
+            label: 'Kilos por semana',
+            data: datasets,
+            backgroundColor: getBackgroundColor(myChart.data.datasets.length),
+            borderColor: getBorderColor(myChart.data.datasets.length),
+            borderWidth: 1
+        });
+
+        // Actualizar el gráfico
+        myChart.update();
+    });
+});
+
+    // Funciones de ayuda para obtener colores únicos
+    function getBorderColor(index) {
+        var colors = [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+        ];
+
+        return colors[index % colors.length];
+    }
+
+    function getBackgroundColor(index) {
+        var colors = [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+        ];
+
+        return colors[index % colors.length];
+    }
+</script>
+////
+controlador funcionando enviando datos
+
+<?php
+
+namespace App\Http\Livewire\Graficos;
+
+use App\Models\User;
+use App\Models\especie;
+use App\Models\campo;
+use App\Models\detallecosecha;
+
+use Livewire\Component;
+
+
+class Graficos extends Component
+{
+    public $campoEspecie;
+    public $especieEspecie;
+    public $semanaEspecie;
+    public $labels = [];
+    public $label = [];
+    public $data = [];
+    public $f=0,$c=0;
+    public $detalleEspecieSemanados=[];
+    public $detalleEspecieSemanatres=[];
+    public $detalleEspecieSemana=[];
+    
+    public function KilosXSemanaCampo(){
+        $this->detalleEspecieSemana = [];
+        $this->labels = [];
+        $this->datasets = [];
+    
+        $especies = especie::all();
+    
+        foreach ($especies as $especie) {
+            $suma = detallecosecha::whereRaw('WEEK(created_at) = ?', [$this->semanaEspecie])
+                ->where('especie_id', $especie->id)
+                ->sum('kilos');
+    
+            if ($suma > 0) {
+                $this->labels[] = $especie->especie;
+                $this->datasets[] = $suma;
+            }
+        }
+    
+        $this->emit('updateChart', $this->labels, $this->datasets);
+    }
+    public function render()
+    {
+        $especies=especie::all();
+        $campos=campo::all();
+        return view('livewire.graficos.graficos',compact('especies','campos'));
+    }
+}
+
+//

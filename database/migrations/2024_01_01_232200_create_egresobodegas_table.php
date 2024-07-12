@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('egresobodegas', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->bigInteger('numero')->nullable();
+            $table->date('fecha');
+            $table->bigInteger('bodeguero_id')->unsigned();
+            $table->foreign('bodeguero_id')->references('id')->on('users');
+            $table->bigInteger('solicitante_id')->unsigned();
+            $table->foreign('solicitante_id')->references('id')->on('users');
+            $table->bigInteger('tarea_id')->nullable();
+            $table->string('observacion',100)->nullable();
+            $table->integer('emitida')->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('egresobodegas');
+    }
+};
