@@ -145,7 +145,7 @@
                         </button>
                     </div>
                     <div class="col-span-6 text-right mt-3">
-                        <button type="button" wire:click="GrabarDocumento"
+                        <button type="button" wire:click="EliminarDocumento({{$egresobodega_id}})"
                             class="bg-red-700 text-white  py-2 px-4 rounded hover:bg-gray-600 shadow-lg shadow-neutral-600">
                             Eliminar Solicitud
                         </button>
@@ -166,7 +166,9 @@
                                     <td class="w-24 font-bold text-center mt-3 border-2">U/Med</td>
                                     <td class="w-24 font-bold text-center mt-3 border-2">Cont/Env</td>
                                     <td class="w-24 font-bold text-center mt-3 border-2">stock</td>
-                                    <td class="w-24 font-bold text-center mt-3 border-2">ML/GR/UN</td>
+                                    <td class="w-24 font-bold text-center mt-3 border-2">Utilizado, ML/GR</td>
+                                    <td class="w-24 font-bold text-center mt-3 border-2">Stock inicial</td>
+                                    <td class="w-24 font-bold text-center mt-3 border-2">Stock Real</td>
                                     <td class="w-24 font-bold text-center mt-3 border-2">ML/GR/UN</td>
                                     <td class="w-10 font-bold text-center mt-3 border-2">+/-</td>
                                 </tr>
@@ -404,18 +406,26 @@
                                                 METROS</option>
                                         </select>
                                     </td>
-                                    <input type="hidden" value={{ $precio }} wire:model.defer="precio">
+                                    <input type="hidden" value="{{ $precio }}" wire:model.defer="precio">
                                     <td class="w-48 font-bold text-center mt-3 border-2">
                                         <input type="text" wire:model.defer="contenido"
-                                            class="w-full uppercase w-24 h-7">
+                                            class="w-full uppercase w-24 h-7 text-center">
                                     </td>
                                     <td class="w-48 font-bold text-center mt-3 border-2">
                                         <input type="text" wire:model.defer="cantidad"
-                                            class="w-full uppercase w-24 h-7">
+                                            class="w-full uppercase w-24 h-7 text-center">
+                                    </td>
+                                    <td class="w-48 font-bold text-center mt-3 border-2">
+                                        <input type="text" wire:model.defer="utilizado"
+                                            class="w-full uppercase w-24 h-7 text-center">
                                     </td>
                                     <td class="w-48 font-bold text-center mt-3 border-2">
                                         <input type="text" wire:model.defer="contenidoTotal"
-                                            class="w-full uppercase w-24 h-7">
+                                            class="w-full uppercase w-24 h-7 text-center">
+                                    </td>
+                                    <td class="w-48 font-bold text-center mt-3 border-2">
+                                        <input type="text" value="{{$contenidoTotal - $utilizado }}"
+                                            class="w-full uppercase w-24 h-7 text-center">
                                     </td>
                                     <td class="w-24 font-bold  mt-3 border-2">
                                         <input type="number" wire:model.defer="detalleEntrega"
@@ -448,12 +458,13 @@
                                                 METROS
                                             @endif
                                         </td>
-                                        <td class="border-2">{{ $detalleEgreso->inventario->contenido }}</td>
-                                        <td class="border-2">{{ $detalleEgreso->inventario->cantidad }}</td>
-                                        <td class="border-2">{{ $detalleEgreso->inventario->contenidoTotal }}</td>
-                                        <td class="border-2">{{ $detalleEgreso->detalleEntrega }}</td>
-                                        <td class="border-2"><a href="#"><i
-                                                    class="fa-solid fa-trash text-red-800"></i></a></td>
+                                        <td class="border-2 text-center">{{ $detalleEgreso->inventario->contenido }}</td>
+                                        <td class="border-2 text-center">{{ $detalleEgreso->inventario->cantidad }}</td>
+                                        <td class="border-2 text-center">{{ $detalleEgreso->inventario->utilizado }}</td>
+                                        <td class="border-2 text-center">{{ $detalleEgreso->inventario->contenidoTotal }}</td>
+                                        <td class="border-2 text-center">{{ $detalleEgreso->inventario->contenidoTotal - $detalleEgreso->inventario->utilizado}}</td>
+                                        <td class="border-2 text-center">{{ $detalleEgreso->detalleEntrega }}</td>
+                                        <td class="border-2 text-center"><a href="#" wire:click="QuitarLinea({{ $detalleEgreso->id }})"><i class="fa-solid fa-trash text-red-800"></i></a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

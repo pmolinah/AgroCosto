@@ -32,6 +32,7 @@ return new class extends Migration
             $table->bigInteger('CantidadRestante')->nullable();
             $table->bigInteger('lineaFactura_id')->unsigned();
             $table->foreign('lineaFactura_id')->references('id')->on('detingresobodegas');
+            $table->float('resto')->nullable();
         });
     }
     public function down(): void

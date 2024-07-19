@@ -24,6 +24,7 @@ class inventario extends Model
         'ingresobodega_id',
         'CantidadRestante',
         'lineaFactura_id',
+        'resto',
     ];
 
     public function bodega(){

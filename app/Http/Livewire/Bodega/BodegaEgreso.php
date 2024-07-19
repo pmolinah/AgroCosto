@@ -21,7 +21,7 @@ class BodegaEgreso extends Component
     public $user_id,$tarea_id,$fecha,$item_id,$egresoID,$observacion,$filtro;
     public $visible=false;
     public $solicitante_id,$rut_administrador,$bodega_id,$egresobodega_id,$bodeguero_id;
-    public $unidadMedida,$cantidad,$contenidoTotal,$detalleEntrega,$contenido,$costoc,$precio,$precioUnitario;
+    public $unidadMedida,$cantidad,$contenidoTotal,$detalleEntrega,$contenido,$costoc,$precio,$precioUnitario,$utilizado;
     public $div,$ent,$resto,$suma,$contN,$cantN;
     public function cambioBodega(){
         $this->items=inventario::where('bodega_id',$this->bodega_id)->where('cantidad','>',0)->get();
@@ -39,13 +39,28 @@ class BodegaEgreso extends Component
     }
     public function SeleccionEgreso(){
         $egresosXhacer=egresobodega::where('id',$this->egresoID)->first();
-        $this->fecha=$egresosXhacer->fecha;
-        $this->egresobodega_id=$egresosXhacer->id;
-        $this->solicitante_id=$egresosXhacer->solicitante_id;
-        $this->lineaDetalle=detallegreso::where('egresobodega_id',$this->egresobodega_id)->get();
+        if(isset($egresosXhacer->fecha)){
+            $this->fecha=$egresosXhacer->fecha;
+            $this->egresobodega_id=$egresosXhacer->id;
+            $this->solicitante_id=$egresosXhacer->solicitante_id;
+            $this->lineaDetalle=detallegreso::where('egresobodega_id',$this->egresobodega_id)->get();
+            $this->visible=true;
+        }else{
+            $this->visible=false;
+            $this->egresobodega_id='';
+            $this->solicitante_id='';
+            $this->fecha='';
+        }
     }
     public function AgregarLinea(){
-        
+        if($this->bodega_id==NULL || $this->item_id==NULL || $this->detalleEntrega==NULL){
+            $this->dispatchBrowserEvent('ErrorFaltanDatos', [
+                'title' => 'Error, Faltan Datos.',
+                'icon'=>'error',
+                'iconColor'=>'blue',
+            ]);
+            return back();
+        }
         if($this->unidadMedida==1 || $this->unidadMedida==2){
                 $this->costo=($this->precio/$this->contenido);
                 $this->costo = ($this->costo/1000);
@@ -111,6 +126,7 @@ class BodegaEgreso extends Component
         $this->contenidoTotal=$itenInventario->contenidoTotal;
         $this->contenido=$itenInventario->contenido;
         $this->precio=$itenInventario->precioUnitario;
+        $this->utilizado=$itenInventario->utilizado;
     }
     public function generarEgreso(){
         $detalleEgreso=detallegreso::where('egresobodega_id',$this->egresobodega_id)->count();
@@ -145,8 +161,9 @@ class BodegaEgreso extends Component
                             $itemInventarioRebaja=inventario::where('id',$detalle->inventario_id)->update(['utilizado'=>($this->suma)]);
                         }
                         $actualizaDetalleEgresoBodega=detallegreso::where('id',$detalle->id)->update(['entregada'=>1]);
-
+           
                     }
+
                     if($itemInventario->item->unidadMedida==4){
                         $this->suma=$detalle->detalleEntrega+$itemInventario->utilizado;
                         $this->contN=($itemInventario->contenido*100);
@@ -174,6 +191,25 @@ class BodegaEgreso extends Component
             ]);
             return redirect()->route('bodega.egreso');
 
+    }
+    public function EliminarDocumento($id){
+        detallegreso::where('id',$id)->delete();
+        $this->dispatchBrowserEvent('EliminarRegistro', [
+            'title' => 'Registro, Eliminado.',
+            'icon'=>'success',
+            'iconColor'=>'blue',
+        ]);
+     
+    }
+
+    public function QuitarLinea($id){
+        detallegreso::where('id',$id)->delete();
+        $this->dispatchBrowserEvent('EliminarRegistro', [
+            'title' => 'Registro, Eliminado.',
+            'icon'=>'success',
+            'iconColor'=>'blue',
+        ]);
+        $this->lineaDetalle=detallegreso::where('egresobodega_id',$this->egresobodega_id)->get();
     }
     public function render()
     {

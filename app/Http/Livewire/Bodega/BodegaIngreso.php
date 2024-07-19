@@ -206,6 +206,7 @@ class BodegaIngreso extends Component
                     'vencimiento'=>$detalleIngresoBodega->vencimiento,
                     'ingresobodega_id'=>$detalleIngresoBodega->ingresobodega_id,
                     'lineaFactura_id'=>$detalleIngresoBodega->id,
+                    'resto'=>$this->total,
                 ]);
               
             }

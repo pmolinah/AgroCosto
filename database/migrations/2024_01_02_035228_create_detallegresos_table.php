@@ -15,18 +15,18 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->bigInteger('egresobodega_id')->unsigned();
-            $table->foreign('egresobodega_id')->references('id')->on('egresobodegas');
+            $table->foreign('egresobodega_id')->references('id')->on('egresobodegas')->onDelete('cascade');
             $table->bigInteger('bodega_id')->unsigned();
             $table->foreign('bodega_id')->references('id')->on('bodegas');
             $table->bigInteger('inventario_id')->unsigned();
             $table->foreign('inventario_id')->references('id')->on('inventarios');
             $table->bigInteger('tarea_id')->nullable();
-            // $table->float('contenido');
-            // $table->float('contenidoTotal');
-            // $table->float('stock');
             $table->float('detalleEntrega');
             $table->float('costo');
             $table->integer('entregada')->nullable();
+            // $table->float('contenido');
+            // $table->float('contenidoTotal');
+            // $table->float('stock');
         });
     }
 
