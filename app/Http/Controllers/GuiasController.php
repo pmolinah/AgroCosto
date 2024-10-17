@@ -16,6 +16,8 @@ use App\Models\observacion;
 use App\Models\guiarecepciondetalle;
 use App\Models\devoluciontraspaso;
 use App\Models\empresa;
+use App\Models\detalleguia;
+use App\Models\desgloseenvase;
 
 
 use PDF;
@@ -85,19 +87,19 @@ class GuiasController extends Controller
             PDF::SetFillColor(229, 231, 233);
             PDF::MultiCell(15, 4, 'Campo', 1, 'C', 1, 0, 108, '', true);
             PDF::SetFillColor(253, 254, 254);
-            PDF::MultiCell(75, 4, $GuiaDespacho->planificacioncosecha->cuartel->campo->campo, 1, 'R', 1, 0, '', '', true);
+            PDF::MultiCell(75, 4, $GuiaDespacho->campo->campo, 1, 'R', 1, 0, '', '', true);
             PDF::Ln(4);
             PDF::SetFillColor(229, 231, 233);
             PDF::MultiCell(15, 4, 'Drección', 1, 'C', 1, 0, 108, '', true);
             PDF::SetFillColor(253, 254, 254);
-            PDF::MultiCell(75, 4, $GuiaDespacho->planificacioncosecha->cuartel->campo->direccion, 1, 'R', 1, 0, '', '', true);
+            PDF::MultiCell(75, 4, $GuiaDespacho->campo->direccion, 1, 'R', 1, 0, '', '', true);
             PDF::Ln(4);
 
             PDF::SetFillColor(229, 231, 233);
             PDF::MultiCell(15, 4, 'Comuna', 1, 'C', 1, 0, 108, '', true);
             PDF::SetFillColor(253, 254, 254);
             PDF::SetFont('Helvetica', '', 7);
-            PDF::MultiCell(75, 4, $GuiaDespacho->planificacioncosecha->cuartel->campo->comuna->comuna, 1, 'R', 1, 0, '', '', true);
+            PDF::MultiCell(75, 4, $GuiaDespacho->campo->comuna->comuna, 1, 'R', 1, 0, '', '', true);
          
             PDF::SetFont('Helvetica', '', 10);
             PDF::Ln(2);
@@ -109,7 +111,7 @@ class GuiasController extends Controller
             PDF::SetFillColor(229, 231, 233);
             PDF::MultiCell(13, 4, 'Rut', 1, 'L', 1, 0, 11, '', true);
             PDF::SetFillColor(253, 254, 254);
-            PDF::MultiCell(20, 4, $GuiaDespacho->planificacioncosecha->cuartel->campo->rut, 1, 'C', 1, 0, '', '', true);
+            PDF::MultiCell(20, 4, $GuiaDespacho->campo->rut, 1, 'C', 1, 0, '', '', true);
             PDF::SetFillColor(229, 231, 233);
             PDF::MultiCell(20, 4, 'Razón Social', 1, 'L', 1, 0, 43, '', true);
             PDF::SetFillColor(253, 254, 254);
@@ -136,7 +138,7 @@ class GuiasController extends Controller
             PDF::SetFillColor(229, 231, 233);
             PDF::MultiCell(13, 4, 'C.SAG', 1, 'C', 1, 0, 114, '', true);
             PDF::SetFillColor(253, 254, 254);
-            PDF::MultiCell(70, 4, $GuiaDespacho->planificacioncosecha->cuartel->codigoSag, 1, 'C', 1, 0, '', '', true);
+            PDF::MultiCell(70, 4, 'sacar del bins', 1, 'C', 1, 0, '', '', true);
             PDF::Ln(4);
             PDF::SetFillColor(229, 231, 233);
             PDF::MultiCell(16, 4, 'Conductor', 1, 'C', 1, 0, 11, '', true);
@@ -162,14 +164,14 @@ class GuiasController extends Controller
             PDF::MultiCell(28, 4, 'Kilos', 1, 'C', 1, 0, 169, '', true);
             PDF::Ln(4);
           
-                    $detalleCosecha=detallecosecha::where('planificacioncosecha_id',$GuiaDespacho->planificacioncosecha_id)->where('exportadora_id',$GuiaDespacho->empresa_id)->get();
+                    $detalleCosecha=detalleguia::where('guia_id',$GuiaDespacho->id)->get();
                     foreach($detalleCosecha as $detalle){
                        
                         PDF::SetFillColor(253, 254, 254);
                         PDF::MultiCell(8, 4, $this->lineas, 1, 'C', 1, 0, 11, '', true);
                         
                         PDF::SetFillColor(253, 254, 254);
-                        PDF::MultiCell(110, 4, $GuiaDespacho->planificacioncosecha->plantacion->especie->especie.',  Variedad : '.$GuiaDespacho->planificacioncosecha->plantacion->especie->variedad->variedad, 1, 'L', 1, 0, 19, '', true);
+                        PDF::MultiCell(110, 4, $detalle->especie->especie.',  Variedad : '.$detalle->especie->variedad->variedad, 1, 'L', 1, 0, 19, '', true);
                         
                         PDF::SetFillColor(253, 254, 254);
                         PDF::MultiCell(40, 4, $detalle->tarjaenvase, 1, 'C', 1, 0, '', '', true);
@@ -199,15 +201,15 @@ class GuiasController extends Controller
                 PDF::Ln(4);
                 $this->lineas=1;
                 $this->suma=0;
-                $exportadoraxplanificacion=exportadoraxplanificacion::with('desgloseenvase')->where('planificacioncosecha_id',$GuiaDespacho->planificacioncosecha_id)->where('empresa_id',$GuiaDespacho->empresa_id)->get();
-                foreach($exportadoraxplanificacion as $exporxplan){
-                    foreach ($exporxplan->desgloseenvase as $detalleEnvase){
+                $exportadoraxplanificacion=desgloseenvase::where('guia_id',$GuiaDespacho->id)->get();
+                
+                    foreach ($exportadoraxplanificacion as $detalleEnvase){
 
                         PDF::SetFillColor(253, 254, 254);
                         PDF::MultiCell(8, 4, $this->lineas, 1, 'C', 1, 0, 11, '', true);
                         
                         PDF::SetFillColor(253, 254, 254);
-                        PDF::MultiCell(110, 4, $exporxplan->planificacioncosecha->envase->envase, 1, 'L', 1, 0, 19, '', true);
+                        PDF::MultiCell(110, 4, $detalleEnvase->planificacioncosecha->envase->envase, 1, 'L', 1, 0, 19, '', true);
                         
                         PDF::SetFillColor(253, 254, 254);
                         PDF::MultiCell(40, 4, $detalleEnvase->color->color, 1, 'C', 1, 0, '', '', true);
@@ -218,7 +220,7 @@ class GuiasController extends Controller
                         $this->suma = $this->suma + $detalleEnvase->stock;
                         PDF::Ln(4);
                     }
-                }
+           
 
                 PDF::Ln(4);  
                 PDF::SetFillColor(229, 231, 233);

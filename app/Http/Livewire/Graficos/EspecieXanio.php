@@ -23,6 +23,7 @@ class EspecieXanio extends Component
             $this->estimadoEspecie[$this->i][1]=$sumarEstimado;
             $this->estimadoEspecie[$this->i][2]=$sumaKilosCosechados;
             $this->estimadoEspecie[$this->i][3]=$especie->id;
+            $this->estimadoEspecie[$this->i][4]=$especie->variedad->variedad;
             $this->i++;
         }
 

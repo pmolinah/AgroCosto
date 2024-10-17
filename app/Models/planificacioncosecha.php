@@ -16,6 +16,7 @@ class planificacioncosecha extends Model
         'envase_id',
         'cuartel_id',
         'plantacion_id',
+        'kilosSolicitados',
     ];
 
   

@@ -286,11 +286,16 @@ class CrudGuiasRecepcion extends Component
                     if($buscarColor>0){
                         $buscarColorSuma=detallecuentaenvase::where('cuentaenvase_id',$CuentaID->id)->where('color_id',$dgrEnvID->color_id)->increment('stock',$dgrEnvID->cantidadEnvase);
                         //si existe la cuenta y el color
-                            $sumaCampo=envaseempresa::where('campo_id',$this->campo_id)->where('envase_id',$dgrEnvID->envase_id)->increment('stock',$dgrEnvID->cantidadEnvase); //->where('envase_id',$dgrEnvID->envase_id)->increment('stock',$dgrEnvID->cantidadEnvase);
-                            
-                            if($this->valorNegativo>=0){
-                            $sumaCuentaEnvase=cuentaenvase::where('campo_id',$this->campo_id)->where('empresa_id',$this->exportadora_id)->where('envase_id',$dgrEnvID->envase_id)->increment('saldo',$dgrEnvID->cantidadEnvase);
-                        }
+                        // dd($dgrEnvID->cantidadEnvase);
+                        dd($this->valorNegativo);
+                             if($this->valorNegativo<0){
+                                $sumaCuentaEnvase=cuentaenvase::where('campo_id',$this->campo_id)->where('empresa_id',$this->exportadora_id)->where('envase_id',$dgrEnvID->envase_id)->increment('saldo',$dgrEnvID->cantidadEnvase);
+
+                                $sumaCampo=envaseempresa::where('campo_id',$this->campo_id)->where('envase_id',$dgrEnvID->envase_id)->increment('stock',$sumaCuentaEnvase->saldo);
+                            }else{    
+                                $sumaCuentaEnvase=cuentaenvase::where('campo_id',$this->campo_id)->where('empresa_id',$this->exportadora_id)->where('envase_id',$dgrEnvID->envase_id)->increment('saldo',$dgrEnvID->cantidadEnvase);
+                                $sumaCampo=envaseempresa::where('campo_id',$this->campo_id)->where('envase_id',$dgrEnvID->envase_id)->increment('stock',$dgrEnvID->cantidadEnvase); //->where('envase_id',$dgrEnvID->envase_id)->increment('stock',$dgrEnvID->cantidadEnvase);
+                            }
                     }else{
                         detallecuentaenvase::create([
                             'cuentaenvase_id'=>$CuentaID->id,

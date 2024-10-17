@@ -26,6 +26,7 @@ return new class extends Migration
             $table->bigInteger('plantacion_id')->unsigned();
             $table->foreign('plantacion_id')->references('id')->on('plantacions');
             $table->integer('finalizada')->unsigned()->nullable();
+            $table->float('kilosSolicitados')->unsigned();
             $table->float('kilosRealesCosechados')->unsigned()->nullable();
                        
         });

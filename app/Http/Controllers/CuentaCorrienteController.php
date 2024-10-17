@@ -151,17 +151,17 @@ class CuentaCorrienteController extends Controller
                     $this->colorCantidad=$request->CantidadEnvaseColorDos;
                     $this->num=count($this->colorMatriz);
                     for($i=0;$i<$this->num;$i++){
-                        $color=color::where('color',$this->colorMatriz[$i])->get();
-                        foreach($color as $colorID){
-                            $SaveCuenta=desgloseenvasecampo::create([
-                                'envaseempresa_id'=>$cuenta->id,
-                                'stock'=>$this->colorCantidad[$i],
-                                'color_id'=>$colorID->id,
-                            ]);
-                            $this->sumaEnvases=$this->sumaEnvases + $this->colorCantidad[$i]; 
-                        }
-                    }
-                    $cuenta->update(['stock'=>$this->sumaEnvases]); 
+                         $color=color::where('color',$this->colorMatriz[$i])->get();
+                         foreach($color as $colorID){
+                             $SaveCuenta=desgloseenvasecampo::create([
+                                 'envaseempresa_id'=>$cuenta->id,
+                                 'stock'=>$this->colorCantidad[$i],
+                                 'color_id'=>$colorID->id,
+                             ]);
+                             $this->sumaEnvases=$this->sumaEnvases + $this->colorCantidad[$i]; 
+                         }
+                     }
+                     $cuenta->update(['stock'=>$this->sumaEnvases]); 
             }else{
                 $cuentacampoexiste=envaseempresa::where('campo_id',$request->campo_id)->where('envase_id',$request->envase_id)->get();
                     $this->colorMatriz=$request->colores_nomDos;

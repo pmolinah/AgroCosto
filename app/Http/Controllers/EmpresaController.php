@@ -88,4 +88,13 @@ class EmpresaController extends Controller
             return 0;
         }
     }
+    public function VerificaCorreoEmpresa($email){
+        $correo=empresa::where('email',$email)->first();
+   
+        if($correo){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 }

@@ -14,6 +14,7 @@ use App\Models\variedad;
 use App\Models\especie;
 use App\Models\color;
 use App\Models\observacion;
+use App\Models\tipocosto;
 use Illuminate\Support\Facades\Hash;
 
 class Roleseeder extends Seeder
@@ -24,6 +25,9 @@ class Roleseeder extends Seeder
     public function run(): void
     {
         //
+        tipocosto::create(['costo'=>'Directo']);
+        tipocosto::create(['costo'=>'Indirecto']);
+
         color::create(['color'=>'AZUL']);
         color::create(['color'=>'AMARILLO']);
         color::create(['color'=>'ROJO']);
@@ -128,7 +132,22 @@ class Roleseeder extends Seeder
                 Permission::create(['name'=>'Adm.emp.btn','description'=>'Boton para Acceder a Opciones Empresas'])->assignRole([$role1]);
                 Permission::create(['name'=>'Adm.plan.est.btn','description'=>'Boton para Acceder a Opciones Estimaciones'])->assignRole([$role1]);
 
-        $tipousuario=tipousuario::create([
+                //Certificaciones
+                Permission::create(['name'=>'Adm.cert.btn','description'=>'Boton para Acceder a Certificaciones de Cuartel y Campos'])->assignRole([$role1]);
+                Permission::create(['name'=>'Adm.est.prod.btn','description'=>'Boton para Acceder para Planificar y ver Estimaciones'])->assignRole([$role1]);
+                Permission::create(['name'=>'Adm.reg.veh.btn','description'=>'Boton para Acceder a Registro de Vehículos'])->assignRole([$role1]);
+                Permission::create(['name'=>'Adm.cont.bod.btn','description'=>'Boton para Acceder a Control de Bodega'])->assignRole([$role1]);
+                Permission::create(['name'=>'Adm.adm.tar.btn','description'=>'Boton para Acceder a Administración de Tareas'])->assignRole([$role1]);
+                Permission::create(['name'=>'Adm.fin.cost.btn','description'=>'Boton para Acceder a Administración de Costos'])->assignRole([$role1]);
+                Permission::create(['name'=>'Adm.cuent.env.btn','description'=>'Boton para Acceder a Cuentas Corrientes'])->assignRole([$role1]);
+                Permission::create(['name'=>'Adm.conf.env.btn','description'=>'Boton para Acceder a Configuración de Envases, Especies y Variedades'])->assignRole([$role1]);
+                Permission::create(['name'=>'Adm.cier.temp.btn','description'=>'Boton para Acceder a Cierre de Temporada'])->assignRole([$role1]);
+                Permission::create(['name'=>'Adm.bod.item.btn','description'=>'Boton para Acceder a Creación de Bodega e Items'])->assignRole([$role1]);
+                Permission::create(['name'=>'Adm.cam.btn','description'=>'Boton para Acceder a Creación Campos'])->assignRole([$role1]);
+                Permission::create(['name'=>'Adm.cua.btn','description'=>'Boton para Acceder a Creación de Cuarteles'])->assignRole([$role1]);
+        
+        
+                $tipousuario=tipousuario::create([
             'tipousuario'=>'Administrador',
         ]);
         $tipousuario=tipousuario::create([
@@ -158,7 +177,7 @@ class Roleseeder extends Seeder
         ])->assignRole($role1);
 
 
-        Tipo::create(['tipo'=>'Campo']);
+        Tipo::create(['tipo'=>'Razón social dueña o administrador de campo(s)']);
         Tipo::create(['tipo'=>'Proveedor']);
         Tipo::create(['tipo'=>'Contratista']);
         Tipo::create(['tipo'=>'Exportadora']);

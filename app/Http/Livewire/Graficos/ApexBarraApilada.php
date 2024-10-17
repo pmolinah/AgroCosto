@@ -15,6 +15,7 @@ class ApexBarraApilada extends Component
     public $labels = [];
     public $data = [];
     public $f=0,$c=0;
+    public $esp_var;
     public function mount(){
         $this->semanaEspecieCampoPila = Carbon::now()->weekOfYear;
         $this->semanaEspecie=($this->semanaEspecieCampoPila);
@@ -47,8 +48,9 @@ public function KilosXSemanaCampoxEspecie()
 
         // Obtener las especies y kilos
         foreach ($detalles as $detalle) {
+            $this->esp_var=$detalle->especie->especie.",".$detalle->especie->variedad->variedad;                                  
             $especiesCampo[] = [
-                'nombre' => $detalle->especie->especie, // Ajustar aquí al nombre del campo correcto
+                'nombre' => $this->esp_var, //$detalle->especie->especie, // Ajustar aquí al nombre del campo correcto
                 'kilos' => $detalle->total_kilos,
             ];
         }

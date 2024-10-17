@@ -29,9 +29,9 @@ class TareasPlanificadas extends Component
         $datoCuartel=cuartel::where('id',$this->cuartel_id)->first();
         $this->superficie=$datoCuartel->superficie;
         $especie=plantacion::where('id',$this->cuartel_id)->first();
-        $this->especie=$especie->especie->especie;
-        $this->variedad=$especie->especie->variedad->variedad;
-        $this->cantPlan=$especie->cantidadPlantas;
+        // $this->especie=$especie->especie->especie;
+        // $this->variedad=$especie->especie->variedad->variedad;
+        // $this->cantPlan=$especie->cantidadPlantas;
 
     }
     public function DetalleTarea($id){

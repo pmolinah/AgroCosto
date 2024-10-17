@@ -91,6 +91,24 @@
                 showConfirmButton: false
             });
         });
+        window.addEventListener('ErrorTieneDatos', function(e) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Existen Datos Asociados al Registro, no se púede eliminar',
+                text: '{{ Session::get('error') }}',
+                timer: 5000,
+                showConfirmButton: false
+            });
+        });
+        window.addEventListener('ErrorDiferencia', function(e) {
+            Swal.fire({
+                icon: 'error',
+                title: 'La Cantidad supera al trabajo restante',
+                text: '{{ Session::get('error') }}',
+                timer: 5000,
+                showConfirmButton: false
+            });
+        });
         window.addEventListener('CierreCorrecto', function(e) {
             Swal.fire({
                 icon: 'success',
@@ -127,6 +145,15 @@
                 showConfirmButton: false
             });
         });
+        window.addEventListener('ErrorSinCuentacorriente', function(e) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error, Exportadora no tiene cuenta de envases, puede crearla en 0 para el envase utilizado',
+                text: '{{ Session::get('error') }}',
+                timer: 5000,
+                showConfirmButton: false
+            });
+        });
         window.addEventListener('ErrorFaltanDatos', function(e) {
             Swal.fire({
                 icon: 'error',
@@ -138,8 +165,11 @@
         });
         $(document).ready(function() {
             $('#myTable').DataTable({
-                responsive: true
+                responsive: true,
+                "pageLength": 10,
+                "lengthChange": false
             });
+            
         });
         $(document).ready(function() {
             $('#myTable3').DataTable();

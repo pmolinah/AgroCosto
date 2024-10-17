@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('desgloseenvases', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->bigInteger('guia_id')->unsigned();
+            $table->foreign('guia_id')->references('id')->on('guias');
             $table->bigInteger('planificacioncosecha_id')->unsigned();
             $table->foreign('planificacioncosecha_id')->references('id')->on('planificacioncosechas');
             $table->integer('stock')->unsigned();
-           
+            $table->string('tarjaEnvase',20)->nullable();
             $table->bigInteger('exportadoraxplanificacion_id')->unsigned();
-            $table->foreign('exportadoraxplanificacion_id')->references('id')->on('exportadoraxplanificacions');
+            $table->foreign('exportadoraxplanificacion_id')->references('id')->on('empresas');
         });
     }
 

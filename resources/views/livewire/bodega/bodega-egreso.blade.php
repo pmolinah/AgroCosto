@@ -166,7 +166,7 @@
                                     <td class="w-24 font-bold text-center mt-3 border-2">U/Med</td>
                                     <td class="w-24 font-bold text-center mt-3 border-2">Cont/Env</td>
                                     <td class="w-24 font-bold text-center mt-3 border-2">stock</td>
-                                    <td class="w-24 font-bold text-center mt-3 border-2">Utilizado, ML/GR</td>
+                                    <td class="w-24 font-bold text-center mt-3 border-2">Uti x Env, ML/GR</td>
                                     <td class="w-24 font-bold text-center mt-3 border-2">Stock inicial</td>
                                     <td class="w-24 font-bold text-center mt-3 border-2">Stock Real</td>
                                     <td class="w-24 font-bold text-center mt-3 border-2">ML/GR/UN</td>
@@ -424,7 +424,7 @@
                                             class="w-full uppercase w-24 h-7 text-center">
                                     </td>
                                     <td class="w-48 font-bold text-center mt-3 border-2">
-                                        <input type="text" value="{{$contenidoTotal - $utilizado }}"
+                                        <input type="text" value="{{$restoTotal }}"
                                             class="w-full uppercase w-24 h-7 text-center">
                                     </td>
                                     <td class="w-24 font-bold  mt-3 border-2">

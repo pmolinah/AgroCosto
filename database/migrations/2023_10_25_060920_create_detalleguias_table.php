@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('guia_id')->references('id')->on('guias');
             $table->bigInteger('planificacioncosecha_id')->unsigned();
             $table->foreign('planificacioncosecha_id')->references('id')->on('planificacioncosechas');
-            $table->integer('cantidadEnvases')->nullable();
+            // $table->integer('cantidadEnvases')->nullable();
             $table->string('detalle')->nullable();
             $table->bigInteger('color_id')->unsigned();
             $table->foreign('color_id')->references('id')->on('colors');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->bigInteger('especie_id')->unsigned();
             $table->foreign('especie_id')->references('id')->on('especies');
             $table->integer('kilos')->nullable();
-
+            $table->string('tarjaenvase',20)->nullable();
         });
     }
 

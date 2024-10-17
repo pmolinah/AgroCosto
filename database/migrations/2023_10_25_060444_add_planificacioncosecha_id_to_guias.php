@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('guias', function (Blueprint $table) {
-            $table->bigInteger('planificacioncosecha_id')->unsigned();
-            $table->foreign('planificacioncosecha_id')->references('id')->on('planificacioncosechas');
+
+            // $table->bigInteger('planificacioncosecha_id')->unsigned();
+            // $table->foreign('planificacioncosecha_id')->references('id')->on('planificacioncosechas');
 
         });
     }
@@ -24,8 +25,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('guias', function (Blueprint $table) {
-            $table->dropForeign(['planificacioncosecha_id']);
-            $table->dropColumn('planificacioncosecha_id');
+
+            // $table->dropForeign(['planificacioncosecha_id']);
+            // $table->dropColumn('planificacioncosecha_id');
         });
     }
 };

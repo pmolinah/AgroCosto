@@ -1,7 +1,7 @@
 <div>
     <div class="w-full rounded-xl border border-gray-200 bg-white py-2 px-2 shadow-md shadow-neutral-800">
         <div class="flex items-center justify-between px-2 text-base font-medium text-gray-700">
-            <div>Guia de Recepción de Envases y Especies</div>
+            <div>Guia de Recepción de Envases y Especies.</div>
         </div>
         <div class="mt-2">
             <div class="flex max-h-[600px] w-full flex-col overflow-y-scroll">

@@ -16,16 +16,19 @@ return new class extends Migration
             $table->timestamps();
             $table->bigInteger('empresa_id')->unsigned();
             $table->foreign('empresa_id')->references('id')->on('empresas');
+            $table->bigInteger('cliente_id')->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('empresas');
             $table->bigInteger('numero')->unsigned()->nullable();
             $table->integer('tipo')->unsigned();
-            $table->integer('cantidadKilos')->unsigned();
-            $table->integer('cantidadEnvases')->unsigned();
-            $table->datetime('fecha');
+            $table->integer('cantidadKilos')->unsigned()->nullable();
+            $table->integer('cantidadEnvases')->unsigned()->nullable();
+            $table->date('fecha');
             $table->string('observacion',100)->nullable();
-            $table->bigInteger('envase_id')->unsigned();
-            $table->foreign('envase_id')->references('id')->on('envases');
+            $table->bigInteger('campo_id')->unsigned();
+            $table->foreign('campo_id')->references('id')->on('campos');
             $table->bigInteger('conductor_id')->unsigned();
             $table->foreign('conductor_id')->references('id')->on('users');
+            $table->integer('emitida')->nullable();
         });
     }
 

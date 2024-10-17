@@ -81,9 +81,19 @@ $(document).ready(function(){
         $('#empresaPlan_id').on('change', Cambio_empresa_plan);
         $('#campoPlan_id').on('change', Cambio_campo_plan);
         $('#envase_id').on('change',Cambio_envase_plan);
+        $('#email').on('change',VerificaCorreoEmpresa);
   
     });
 
+    function VerificaCorreoEmpresa(){
+        var correoEmpresa = $('#email').val();
+        $.get('/api/Verificar/'+correoEmpresa+'/Empresa',function(res){
+            if(res==1){
+                document.getElementById('email').value="";
+                alert('Correo ya Existe');
+            }
+        });
+    }
    
     function Cambio_envase_plan(){
         var caID = $('#campoPlan_id').val();

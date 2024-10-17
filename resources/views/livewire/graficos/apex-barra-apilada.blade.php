@@ -1,5 +1,5 @@
 <div>
-    <div class="mr-5 inline-block">Kilos x Semana, Por Campos
+    <div class="mr-5 inline-block">Kilos x Semana, Por Campos...
         <select wire:model.defer="semanaEspecieCampoPila" wire:change="KilosXSemanaCampoxEspecie">
             <option></option>
             @for ($i = 1; $i < 53; $i++)
@@ -59,7 +59,7 @@
                                 var especieIndex = opts.dataPointIndex;
                                 var especieNombre = data[especieIndex].especies[opts.seriesIndex]
                                     .nombre;
-                                return val + " kilos - " + especieNombre;
+                                return val + " kilos - "; // + especieNombre;
                             }
                         },
                         title: {

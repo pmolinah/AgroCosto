@@ -14,6 +14,7 @@ class bodega extends Model
         'encargado_id',
         'observacion',
         'bodega',
+        'acopio',
        
     ];
 

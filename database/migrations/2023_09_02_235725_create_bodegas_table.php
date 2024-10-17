@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('encargado_id')->unsigned();
             $table->foreign('encargado_id')->references('id')->on('users');
             $table->string('observacion',200)->nullable();
+            $table->integer('acopio')->nullable();
         });
     }
 

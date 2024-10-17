@@ -45,3 +45,4 @@ Route::get('/Eliminar/Cuenta/{valorPersonalizado}/Envases/Campo',[CuentaCorrient
 Route::get('/datos/{rut}/Empresa/',[EmpresaController::class, 'verificarRut']);
 Route::get('/Eliminar/{idEliminar}/Plantacion',[PlantacionController::class, 'destroy']);
 Route::get('/obtenerDatosEspecie/{id}',[CosechaController::class, 'EstimacionCosecha']);
+Route::get('/Verificar/{correo}/Empresa',[EmpresaController::class, 'VerificaCorreoEmpresa']);

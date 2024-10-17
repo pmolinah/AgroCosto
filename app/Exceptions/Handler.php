@@ -27,4 +27,17 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+{
+    // Verificar si el error es un 419 (CSRF Token Expired)
+    if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+        // Redirigir a la página de inicio de sesión o a una página personalizada
+        return redirect()->route('login')->with('message', 'Tu sesión ha caducado, por favor inicia sesión de nuevo.');
+    }
+
+    // Continuar con el manejo de otros errores
+    return parent::render($request, $exception);
+}
+
 }

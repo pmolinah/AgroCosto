@@ -3,7 +3,7 @@
         <div class="mx-auto sm:px-6 lg:px-8">
 
             <div class="p-1 w-52 rounded-full bg-white shadow  mb-1"><i class="fa-solid fa-file mr-3 ml-3"></i>
-                <label class="font-bold">Lista Guías Finalizadas</label>
+                <label class="font-bold">Planificaciones creadas</label>
             </div>
             <div class="grid grid-cols-1 md:lg:xl:grid-cols-1 group bg-white shadow-xl shadow-lg border p-5 rounded-lg">
                 @can('adm.crear.planificacion')

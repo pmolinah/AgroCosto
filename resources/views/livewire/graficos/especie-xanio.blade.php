@@ -57,7 +57,7 @@
                                 $this->estimadoEspecie[$this->i][2]=$sumaKilosCosechados; cantidad total cosechada actual--}}
                                 <div class="ml-5 text-left">
                                     <p class="text-gray-600 sm:text-xl">
-                                        {{ $estimadoEspecie[$i][0] }},</br>  {{-- especie --}}
+                                        {{ $estimadoEspecie[$i][0] }},{{ $estimadoEspecie[$i][4] }}</br>  {{-- especie --}}
                                         @if ($porc > 0)
                                             @if ($estimadoEspecie[$i][2] > $estimadoEspecie[$i][1])
                                                 @php

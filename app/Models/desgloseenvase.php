@@ -14,6 +14,8 @@ class desgloseenvase extends Model
         'planificacioncosecha_id',
         'stock',
         'color_id',
+        'tarjaEnvase',
+        'guia_id',
     ];
 
    
@@ -22,10 +24,13 @@ class desgloseenvase extends Model
     }
 
     public function exportadoraxplanificacion(){
-        return $this->belongsTo(exportadoraxplanificacion::class);
+        return $this->belongsTo(empresa::class);
     }
 
     public function planificacioncosecha(){
         return $this->belongsTo(planificacioncosecha::class);
+    }
+    public function guia(){
+        return $this->belongsTo(guia::class);
     }
 }

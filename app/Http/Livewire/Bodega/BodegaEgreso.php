@@ -18,7 +18,7 @@ class BodegaEgreso extends Component
     public $despachosSinEmitir=[];
     public $visibleItem=false;
     public $items=[];
-    public $user_id,$tarea_id,$fecha,$item_id,$egresoID,$observacion,$filtro;
+    public $user_id,$tarea_id,$fecha,$item_id,$egresoID,$observacion,$filtro,$restoTotal;
     public $visible=false;
     public $solicitante_id,$rut_administrador,$bodega_id,$egresobodega_id,$bodeguero_id;
     public $unidadMedida,$cantidad,$contenidoTotal,$detalleEntrega,$contenido,$costoc,$precio,$precioUnitario,$utilizado;
@@ -127,6 +127,7 @@ class BodegaEgreso extends Component
         $this->contenido=$itenInventario->contenido;
         $this->precio=$itenInventario->precioUnitario;
         $this->utilizado=$itenInventario->utilizado;
+        $this->restoTotal=$itenInventario->resto;
     }
     public function generarEgreso(){
         $detalleEgreso=detallegreso::where('egresobodega_id',$this->egresobodega_id)->count();
@@ -153,8 +154,10 @@ class BodegaEgreso extends Component
                         if($this->suma>$this->contN){
                             $this->ent=floor($this->suma/$this->contN);
                             $itemInventarioRebaja=inventario::where('id',$detalle->inventario_id)->decrement('cantidad',$this->ent);
+                            $itemInventarioRebaja=inventario::where('id',$detalle->inventario_id)->decrement('resto',$detalle->detalleEntrega);
                             $itemInventarioRebaja=inventario::where('id',$detalle->inventario_id)->update(['utilizado'=>($this->suma-($this->contN*$this->ent))]);
                         }elseif($this->suma==$this->contN){
+                            $itemInventarioRebaja=inventario::where('id',$detalle->inventario_id)->decrement('resto',$detalle->detalleEntrega);
                             $itemInventarioRebaja=inventario::where('id',$detalle->inventario_id)->decrement('cantidad',1);
                             $itemInventarioRebaja=inventario::where('id',$detalle->inventario_id)->update(['utilizado'=>0]);
                         }else{

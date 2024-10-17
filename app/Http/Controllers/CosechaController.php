@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\contraistaxplanificacion;
 use App\Http\Livewire\Cosecha\Cosechar;
 use App\Models\detallecosecha;
+use App\Models\bodega;
 // use Barryvdh\DomPDF\Facade\Pdf;
 use PDF; // at the top of the file
 
@@ -61,9 +62,7 @@ class CosechaController extends Controller
 
     public function planificacion(){
         $planificacioncosechas=planificacioncosecha::with('contraistaxplanificacion')->get();
-
-        
-    
+ 
         return view('Cosecha.planificacionIndex',compact('planificacioncosechas'));
     }
 
@@ -73,12 +72,13 @@ class CosechaController extends Controller
         $empresasE=empresa::where('tipo_id',3)->get();
         $usuarios=User::all();
         $envases=envase::all();
+
         return view('Cosecha.planificacionCreate', compact('empresas','usuarios','envases','empresasC','empresasE'));
     }
 
     public function planificacionStore(Request $request){
         // dd($request);
-        if(!isset($request->exportadora_id) || !isset($request->tratoxcosecha)){
+        if(!isset($request->tratoxcosecha)){
             
             Session::flash('error', 'Faltan Datos...');
             return back();
@@ -89,32 +89,33 @@ class CosechaController extends Controller
             'fechaf'=>$request->fechaf,
             'cuartel_id'=>$request->cuartel_id,
             'envase_id'=>$request->envase_id,
-            'kilos'=>$request->totalkilos,
+            'kilos'=>$request->kilosSolicitados,
+            'kilosSolicitados'=>$request->kilosSolicitados,
             'plantacion_id'=>$request->plantacion_id,
         ]);
        
-        $longitud = count($request->exportadora_id);
-        //dd($request);
-        for($i=0;$i<$longitud;$i++){
-            //dd($request->envase_id);
-            $cuentaEmpresa=cuentaenvase::where('empresa_id',$request->exportadora_id[$i])->where('envase_id',$request->envase_id)->get();
-            if ($cuentaEmpresa->isEmpty())
-            {
-                $this->cuenEnv=0;
-            }else{
-                foreach($cuentaEmpresa as $cuentaEnvEmp){
-                    $this->cuenEnv=$cuentaEnvEmp->id;
-                }
-            }
+        // $longitud = count($request->exportadora_id);
+        // //dd($request);
+        // for($i=0;$i<$longitud;$i++){
+        //     //dd($request->envase_id);
+        //     $cuentaEmpresa=cuentaenvase::where('empresa_id',$request->exportadora_id[$i])->where('envase_id',$request->envase_id)->get();
+        //     if ($cuentaEmpresa->isEmpty())
+        //     {
+        //         $this->cuenEnv=0;
+        //     }else{
+        //         foreach($cuentaEmpresa as $cuentaEnvEmp){
+        //             $this->cuenEnv=$cuentaEnvEmp->id;
+        //         }
+        //     }
            
-                //dd($this->cuenEnv);
-                 exportadoraxplanificacion::create([
-                'planificacioncosecha_id'=>$planificacioncosecha->id,
-                'empresa_id'=>$request->exportadora_id[$i],
-                'kilosSolicitados'=>$request->kilosexportadora[$i],
-                'cuentaenvase_id'=>$this->cuenEnv,
-                ]);
-        };
+        //         //dd($this->cuenEnv);
+        //          exportadoraxplanificacion::create([
+        //         'planificacioncosecha_id'=>$planificacioncosecha->id,
+        //         'empresa_id'=>$request->exportadora_id[$i],
+        //         'kilosSolicitados'=>$request->kilosexportadora[$i],
+        //         'cuentaenvase_id'=>$this->cuenEnv,
+        //         ]);
+        // };
     
 
         $longitud=count($request->id);
@@ -131,13 +132,13 @@ class CosechaController extends Controller
     }
 
     public function planificacionEdit($id){
-        $empresas=empresa::where('tipo_id',1)->get();
-        $empresasC=empresa::where('tipo_id',3)->get();
-        $empresasE=empresa::where('tipo_id',4)->get();
-        $usuarios=User::all();
-        $envases=envase::all();
-        $planificacioncosecha=planificacioncosecha::with('exportadoraxplanificacion','contraistaxplanificacion')->where('id',$id)->get();
-        return view('Cosecha.planificacionEdit', compact('empresas','usuarios','envases','planificacioncosecha','empresasC','empresasE'));
+        // $empresas=empresa::where('tipo_id',1)->get();
+        // $empresasC=empresa::where('tipo_id',3)->get();
+        // $empresasE=empresa::where('tipo_id',4)->get();
+        // $usuarios=User::all();
+        // $envases=envase::all();
+        // $planificacioncosecha=planificacioncosecha::with('exportadoraxplanificacion','contraistaxplanificacion')->where('id',$id)->get();
+        return view('Cosecha.planificacionEdit', ['planificacioncosecha_id' => $id]); //compact('empresas','usuarios','envases','planificacioncosecha','empresasC','empresasE','id'
     }
 
     public function planificacionUpdate(Request $request){
@@ -217,13 +218,13 @@ class CosechaController extends Controller
 
     public function CosechaStore(Request $request){
         //dd($request);
-        planificacioncosecha::where('id',$request->planificacionCosecha_id)->update(['finalizada'=>1,'kilosRealesCosechados'=>$request->cosechaActual]);
-        $num=count($request->exportadora_id);
+        // planificacioncosecha::where('id',$request->planificacionCosecha_id)->update(['finalizada'=>1,'kilosRealesCosechados'=>$request->cosechaActual]);
+        // $num=count($request->exportadora_id);
         //dd($num);
-        for($i=0;$i<$num;$i++){
-            //dd($request->exportadora_id[$i]);
-            exportadoraxplanificacion::where('id',$request->exportadora_id[$i])->update(['KilosRecolectados'=>$request->valores[$i]]); //,'envasesUtilizadosReales'=>$request->bines[$i]
-        };
+        // for($i=0;$i<$num;$i++){
+        //     //dd($request->exportadora_id[$i]);
+        //     exportadoraxplanificacion::where('id',$request->exportadora_id[$i])->update(['KilosRecolectados'=>$request->valores[$i]]); //,'envasesUtilizadosReales'=>$request->bines[$i]
+        // };
         $user = auth()->User()->id;
         $planificaciones = planificacioncosecha::whereHas('cuartel', function ($query) use ($user) {
             $query->where('capataz_id', $user);

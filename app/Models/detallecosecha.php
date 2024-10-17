@@ -14,22 +14,26 @@ class detallecosecha extends Model
         'empresa_id',
         'tarjaenvase',
         'kilos',
-        'exportadora_id',
+        'bodega_id',
         'pivote',
         'campo_id',
         'especie_id',
         'cuartel_id',
+        'color_id',
+        'fechaCosecha',
     ];
 
     public function planificacioncosecha(){
         return $this->belongsTo(planificacioncosecha::class);
     }
-
+    public function color(){
+        return $this->belongsTo(color::class);
+    }
     public function empresa(){
         return $this->belongsTo(empresa::class);
     }
-    public function exportadora(){
-        return $this->belongsTo(empresa::class);
+    public function bodega(){
+        return $this->belongsTo(bodega::class);
     }
 
     public function especie(){

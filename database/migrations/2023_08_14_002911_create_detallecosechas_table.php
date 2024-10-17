@@ -20,8 +20,6 @@ return new class extends Migration
             $table->foreign('empresa_id')->references('id')->on('empresas');
             $table->string('tarjaenvase')->nullable();
             $table->float('kilos')->unsigned();
-            $table->bigInteger('exportadora_id')->unsigned();
-            $table->foreign('exportadora_id')->references('id')->on('empresas');
             $table->bigInteger('campo_id')->unsigned();
             $table->foreign('campo_id')->references('id')->on('campos');
             $table->bigInteger('cuartel_id')->unsigned();
@@ -29,6 +27,7 @@ return new class extends Migration
             $table->bigInteger('especie_id')->unsigned();
             $table->foreign('especie_id')->references('id')->on('especies');
             $table->string('pivote');
+            $table->date('fechaCosecha')->nullable();
                        
         });
     }

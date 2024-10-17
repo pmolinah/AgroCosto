@@ -11,6 +11,8 @@ use App\Models\cuentaenvase;
 use App\Models\desgloseenvase;
 use App\Models\envaseempresa;
 use App\Models\color;
+use App\Models\bodega;
+use App\Models\almacenamiento;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Session;
 
@@ -29,10 +31,11 @@ class Cosechar extends Component
     public $cosechaFinal;
     public $valores=[];
     public $expKilosFinal=[];
+    public $bodegas=[];
     public $pivoteDetalleCosecha;
     public $exportadoraIDDetalle,$cantidadDetalle,$coloresDDetalle;
     public $CampoID,$CuartelID,$EspecieID;
-    public $CampoNombre,$CuartelNombre,$EspecieNombre;
+    public $CampoNombre,$CuartelNombre,$EspecieNombre,$bodega_id,$color_id,$fechaCosecha;
  
     use WithPagination;
 
@@ -41,7 +44,7 @@ class Cosechar extends Component
     public function agregarKilos(){
 
         
-        if($this->contratista_id==null || $this->kilos==null || $this->tarjaenvase==null || $this->exportadoraID==null ){
+        if($this->contratista_id==null || $this->kilos==null || $this->tarjaenvase==null || $this->bodega_id==null || $this->color_id==null || $this->fechaCosecha==NULL){
             $this->dispatchBrowserEvent('ErrorCampoVacioCosecha', [
                 'title' => 'Faltan Datos...',
                 'icon'=>'error',
@@ -58,24 +61,35 @@ class Cosechar extends Component
             ]);
             return back();
         }
-        $this->pivoteDetalleCosecha=$this->planificacioncosecha_id.'-'.$this->contratista_id.'-'.$this->exportadoraID;
+        $this->pivoteDetalleCosecha=$this->planificacioncosecha_id.'-'.$this->contratista_id.'-'.$this->bodega_id;
         detallecosecha::create([
             'planificacioncosecha_id'=>$this->planificacioncosecha_id,
             'empresa_id'=>$this->contratista_id,
             'tarjaenvase'=>$this->tarjaenvase,
             'kilos'=>$this->kilos,
-            'exportadora_id'=>$this->exportadoraID,
+            'bodega_id'=>$this->bodega_id,
             'pivote'=>$this->pivoteDetalleCosecha,
             'campo_id'=>$this->CampoID,
             'cuartel_id'=>$this->CuartelID,
             'especie_id'=>$this->EspecieID,
+            'color_id'=>$this->color_id,
+            'fechaCosecha'=>$this->fechaCosecha,
         ]);
-
-        $exportadorKilosRecolectados=exportadoraxplanificacion::where('planificacioncosecha_id',$this->planificacioncosecha_id)->where('empresa_id',$this->exportadoraID)->get();
-        foreach($exportadorKilosRecolectados as $exportadorKilos){
-            $this->suma=$exportadorKilos->KilosRecolectados + $this->kilos;
-            exportadoraxplanificacion::where('planificacioncosecha_id',$this->planificacioncosecha_id)->where('empresa_id',$this->exportadoraID)->update(['KilosRecolectados'=>$this->suma]);
-        }
+        //suma de cosechas a bodega
+        almacenamiento::create([
+            'planificacioncosecha_id'=>$this->planificacioncosecha_id,
+            'empresa_id'=>$this->contratista_id,
+            'tarjaenvase'=>$this->tarjaenvase,
+            'kilos'=>$this->kilos,
+            'bodega_id'=>$this->bodega_id,
+            'campo_id'=>$this->CampoID,
+            'cuartel_id'=>$this->CuartelID,
+            'especie_id'=>$this->EspecieID,
+            'color_id'=>$this->color_id,
+            'pivote'=>$this->pivoteDetalleCosecha,
+            'fechaCosecha'=>$this->fechaCosecha,
+        ]);
+        
 
 
 
@@ -89,7 +103,7 @@ class Cosechar extends Component
 
 
         $valor=$this->planificacioncosecha_id;
-        $planificacion=planificacioncosecha::with('exportadoraxplanificacion','contraistaxplanificacion','detallecosecha')->where('id',$this->planificacioncosecha_id)->get();
+        $planificacion=planificacioncosecha::with('contraistaxplanificacion','detallecosecha')->where('id',$this->planificacioncosecha_id)->get();
         $detalleCo=detallecosecha::where('planificacioncosecha_id',$valor)->paginate(10);
         $resultado = detallecosecha::where('planificacioncosecha_id', $this->planificacioncosecha_id)->sum('kilos');
         $this->cosechaActual=$resultado;
@@ -144,7 +158,7 @@ class Cosechar extends Component
 
     }
 
-    public function ElimnarRegistro($detalle_id){
+    public function ElimnarRegistro($detalle_id,$tarja){
         
         $lineaBorrar=detallecosecha::where('id',$detalle_id)->get();
         foreach($lineaBorrar as $lineaDetalle){
@@ -155,14 +169,12 @@ class Cosechar extends Component
                 $contratistaxplanificacion=contraistaxplanificacion::where('planificacioncosecha_id',$this->planificacioncosecha_id)->where('contratista_id',$lineaDetalle->empresa_id)->update(['kilos'=>$this->resta,'costototal'=>$this->multi]);
                 detallecosecha::where('id',$detalle_id)->delete();
             };
-
-            $exportadoraxplanificacion=exportadoraxplanificacion::where('planificacioncosecha_id',$this->planificacioncosecha_id)->where('empresa_id',$lineaDetalle->exportadora_id)->get();
-            foreach($exportadoraxplanificacion as $exportadoraKilos){
-                $this->resta = $exportadoraKilos->KilosRecolectados - $lineaDetalle->kilos;
-                exportadoraxplanificacion::where('planificacioncosecha_id',$this->planificacioncosecha_id)->where('empresa_id',$lineaDetalle->exportadora_id)->update(['KilosRecolectados'=>$this->resta]);
-            }
+            // $exportadoraxplanificacion=exportadoraxplanificacion::where('planificacioncosecha_id',$this->planificacioncosecha_id)->where('empresa_id',$lineaDetalle->exportadora_id)->get();
+            // foreach($exportadoraxplanificacion as $exportadoraKilos){
+            //     $this->resta = $exportadoraKilos->KilosRecolectados - $lineaDetalle->kilos;
+            //     exportadoraxplanificacion::where('planificacioncosecha_id',$this->planificacioncosecha_id)->where('empresa_id',$lineaDetalle->exportadora_id)->update(['KilosRecolectados'=>$this->resta]);
+            // }
         };
-       
         $planificacion=planificacioncosecha::with('exportadoraxplanificacion','contraistaxplanificacion','detallecosecha')->where('id',$this->planificacioncosecha_id)->get();
         $detalleCo=detallecosecha::where('planificacioncosecha_id',$this->planificacioncosecha_id)->paginate(10);
         $resultado = detallecosecha::where('planificacioncosecha_id', $this->planificacioncosecha_id)->sum('kilos');
@@ -178,6 +190,8 @@ class Cosechar extends Component
                 ]);
             }
         }
+        almacenamiento::where('tarjaenvase',$tarja)->delete();
+   
     }
 
     public function ElimnarDetalleEnvase($desglose_id){
@@ -229,7 +243,7 @@ class Cosechar extends Component
         
         $detalleCo=detallecosecha::where('planificacioncosecha_id',$valor)->paginate(8);
         $resultado = detallecosecha::where('planificacioncosecha_id', $this->planificacioncosecha_id)->sum('kilos');
-
+        $this->bodegas=bodega::where('acopio',1)->get();
         $this->cosechaActual=$resultado;
         $this->cosechaFinal=$resultado;
         return view('livewire.cosecha.cosechar',compact('planificacion','detalleCo','colores'))->with(['CampoID',$this->CampoID,'CuartelID',$this->CuartelID,'EspecieID',$this->EspecieID]);

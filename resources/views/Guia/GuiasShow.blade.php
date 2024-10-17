@@ -17,13 +17,11 @@
                             <th>Guía N°</th>
                             <th>Fechas Emisión</th>
                             <th>Campo</th>
-                            <th>Campo/Exportadora</th>
-                            <th>Cuartel</th>
-                            <th>Especie</th>
-                            <th>Kilos Totales</th>
-                            <th>Tipo Envase</th>
-                            <th>Envases Totales</th>
-                            {{-- <th>Observación</th> --}}
+                            <th>Campo/Cliente</th>
+                            <!-- <th>Cuartel</th> -->
+                          
+                  
+                            <th>Observación</th>
                             <th>Ver Guía</th>
                         </tr>
                     </thead>
@@ -33,14 +31,10 @@
                                 <td>Despacho</td>
                                 <td>D-{{ $guia->numero }}</td>
                                 <td>{{ $guia->fecha }}</td>
-                                <td>{{ $guia->planificacioncosecha->cuartel->campo->campo }}</td>
+                                <td>{{ $guia->campo->campo }}</td>
                                 <td>{{ $guia->empresa->razon_social }}</td>
-                                <td>{{ $guia->planificacioncosecha->cuartel->observaciones }}</td>
-                                <td>{{ $guia->planificacioncosecha->plantacion->especie->especie }}</td>
-                                <td>{{ $guia->cantidadKilos }}</td>
-                                <td>{{ $guia->envase->envase }}</td>
-                                <td>{{ $guia->cantidadEnvases }}</td>
-                                {{-- <td>{{ $guia->observacion }}</td> --}}
+                            
+                                <td>{{ $guia->observacion }}</td>
 
                                 <td>
                                     <a href="{{ route('Guia.despacho', $guia->id) }}">
@@ -61,8 +55,8 @@
                                 <td>{{ $guiaRecep->updated_at }}</td>
                                 <td>{{ $guiaRecep->campo->campo }}</td>
                                 <td>{{ $guiaRecep->empresa->razon_social }}</td>
-                                <td>N/A</td>
-                                <td>
+                                <!-- <td>N/A</td> -->
+                                <!-- <td>
                                     @foreach ($guiaRecep->guiarecepciondetalle as $detalleRecepcion)
                                         {{ $especie = $detalleRecepcion->especie->especie }}</br>
                                     @endforeach
@@ -71,8 +65,8 @@
                                     @foreach ($guiaRecep->guiarecepciondetalle as $detalleRecepcion)
                                         {{ $especie = $detalleRecepcion->kilos }}</br>
                                     @endforeach
-                                </td>
-                                <td>
+                                </td> -->
+                                <!-- <td>
                                     @foreach ($guiaRecep->guiarecepciondetalle as $detalleRecepcion)
                                         {{ $especie = $detalleRecepcion->envase->envase }}</br>
                                     @endforeach
@@ -81,8 +75,8 @@
                                     @foreach ($guiaRecep->guiarecepciondetalle as $detalleRecepcion)
                                         {{ $especie = $detalleRecepcion->cantidadEnvase }}</br>
                                     @endforeach
-                                </td>
-                                {{-- <td>{{ $guiaRecep->observacion }}</td> --}}
+                                </td> -->
+                                <td>{{ $guiaRecep->observacion }}</td>
 
                                 <td>
                                     <a href="{{ route('Guia.RecepcionEmitir', $guiaRecep->id) }}">

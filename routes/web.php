@@ -20,6 +20,7 @@ use App\Http\Controllers\CierreInicioTemporadaController;
 use App\Http\Controllers\PlanEstimadoController;
 use App\Http\Controllers\BodegaItemsController;
 use App\Http\Controllers\TareasController;
+use App\Http\Controllers\ActividadesController;
 use App\Models\empresa;
 /*??
 |--------------------------------------------------------------------------
@@ -157,4 +158,8 @@ Route::get('/', function () {
     Route::get('/Plan/Estimado/Index',[PlanEstimadoController::class, 'index'])->name('PlanEstimado.index');
     Route::get('/Plan/Estimado',[PlanEstimadoController::class, 'CreatePlan'])->name('Create.plan');
     Route::post('/Store/PlanEstimado',[PlanEstimadoController::class, 'store'])->name('PlanEstimacion.store');
+
+    //Actividades
+    Route::get('/Registro/Actividades',[ActividadesController::class, 'RegistroActividad'])->name('Registro.Actividad');
+    Route::get('/Parametros/Actividades',[ActividadesController::class, 'ParametrosActividades'])->name('Parametro.Actividad');
 });

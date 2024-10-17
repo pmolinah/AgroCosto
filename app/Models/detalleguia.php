@@ -15,5 +15,21 @@ class detalleguia extends Model
         'kilos',
         'observacion',
         'color_id',
+        'tarjaenvase',
+        'almacenamiento_id',
     ];
+    public function guia(){
+        return $this->belongsTo(guia::class);
+    }
+    public function planificacioncosecha(){
+        return $this->belongsTo(planificacioncosecha::class);
+    }
+    public function almacenamiento(){
+        return $this->belongsTo(almacenamiento::class);
+    }
+    public function especie(){
+        return $this->belongsTo(especie::class);
+    }
 }
+
+

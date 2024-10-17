@@ -2,9 +2,9 @@
     {{-- cuenta corriente de Campos --}}
     <form action="{{ route('CuenEnvaseCampo.store') }}" method="post">
         @CSRF
-        <div class=" text-left grid sm:grid-cols-1 md:grid-cols-2">
+        <div class=" text-left grid sm:grid-cols-1 md:grid-cols-8">
             @can('adm.crear.cuentacorriente')
-                <div class="bg-neutral-200 p-5 shadow-2xl ml-1 mr-5">
+                <div class="bg-neutral-200 p-5 shadow-2xl ml-1 mr-5 col-span-3">
                     {{-- inicio form --}}
                     <div class="">
                         <div class="border-b border-gray-900/10">
@@ -104,7 +104,7 @@
                                         <div
                                             class="w-[550px] rounded-xl border border-gray-200 bg-white py-2 px-2 shadow-md shadow-gray-100">
                                             <div
-                                                class="flex items-center justify-between px-2 text-base font-medium text-gray-700">
+                                                class="text-center px-2 text-base font-medium text-gray-700">
                                                 <div>Resumen</div>
                                             </div>
                                             <div class="mt-2">
@@ -114,7 +114,7 @@
                                                         <thead
                                                             class="border-b bg-neutral-800 font-medium text-white dark:border-neutral-500 dark:bg-neutral-500">
                                                             <tr>
-                                                                <th scope="col" class="border-2 px-2 py-2">
+                                                                <th >
                                                                     Cantidad</th>
                                                                 <th scope="col" class="border-2 px-2 py-2">Color
                                                                 </th>
@@ -160,15 +160,15 @@
                     {{-- fin form --}}
                 </div>
             @endcan
-            <div class="border-solid border-2 bg-neutral-100 shadow-2xl">
+            <div class="border-solid border-2 bg-neutral-100 shadow-2xl col-span-5">
                 <table class="w-full text-center text-sm font-light ">
                     <thead
                         class="border-b bg-neutral-800 font-medium text-white dark:border-neutral-500 dark:bg-neutral-500">
                         <tr class="border-solid ">
                             <th scope="col" class=" px-6 py-2 border-solid ">Campo.</th>
                             <th scope="col" class=" px-6 py-2 border-solid ">Tipo Envase</th>
-                            <th scope="col" class=" px-6 py-2 border-solid ">Desglose de Envases</th>
-                            <th scope="col" class=" px-6 py-2 border-solid ">Stock Consolidado</th>
+                            <th scope="col" class=" px-6 py-2 border-solid ">Desglose de Envases del Campo</th>
+                            <th scope="col" class=" px-6 py-2 border-solid ">Stock Consolidado de Exportadoras mas campo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -213,12 +213,15 @@
                                     <table class="w-full border-solid border-2 shadow-lg">
                                         <thead>
                                             <tr>
-                                                <th class="border-solid border-2 bg-neutral-500 text-white">Empresa
+                                                <th class="border-solid border-2 bg-red-500 text-white">Empresa
                                                 </th>
-                                                <th class="border-solid border-2 bg-neutral-500 text-white">Stock</th>
+                                                <th class="border-solid border-2 bg-red-500 text-white">Stock</th>
                                             <tr>
                                         </thead>
                                         <tbody>
+                                        @php
+                                        $sum = 0;
+                                        @endphp
                                             @foreach ($cuentaExportadoras as $cuentaExportadora)
                                                 @if ($empresaCampo->campo->id == $cuentaExportadora->campo_id)
                                                     <tr>
@@ -227,40 +230,44 @@
                                                         <th class="border-solid border-2">
                                                             {{ $cuentaExportadora->saldo }}</th>
                                                         @php
-                                                            $sum = 0;
+                                                         
                                                             $sum = $sum + $cuentaExportadora->saldo;
                                                         @endphp
                                                     </tr>
                                                 @endif
                                             @endforeach
-                                            <tr>
+                                            <!-- <tr>
                                                 <th class="border-solid border-2">Campo</th>
 
                                                 <th>
-                                                    @if (isset($sum))
-                                                        {{ $empresaCampo->stock - $sum }}
+                                                        {{$sum + $empresaCampo->stock}}
+                                                     @if (isset($sum))
+                                                        {{ $empresaCampo->stock - (-$sum) }}
                                                     @else
                                                         {{ $empresaCampo->stock }}
-                                                    @endif
+                                                    @endif -->
                                                 </th>
                                             </tr>
+                                            @endforeach
                                             <tr>
-                                                <th class="border-solid border-2 bg-neutral-500 text-white">Total Campo
+                                                <th class="border-solid border-2 bg-red-500 text-white">Total Consolidado Exportadora(s)
                                                     </td>
-                                                <th>{{ $empresaCampo->stock }}</th>
+                                                    <th>@if (isset($sum))
+                                                    {{ $sum }}
+                                                    @endif</th>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </th>
-                                {{-- <th scope="col" class=" px-6 py-4 border-solid border-2 border-sky-500">
+                                <!-- {{-- <th scope="col" class=" px-6 py-4 border-solid border-2 border-sky-500">
                                                          <center><button type="button" id="btnEliminarCampo"
                                                                 data-valor="{{ $empresaCampo->id }}"
                                                                 class="mb-1 inline-block rounded bg-danger px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-danger-900 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]"><i
                                                                     class="far fa-trash-alt"></i></button>
                                                         </center>
-                                                    </th> --}}
+                                                    </th> --}} -->
                             </tr>
-                        @endforeach
+                        
                     </tbody>
                 </table>
             </div>

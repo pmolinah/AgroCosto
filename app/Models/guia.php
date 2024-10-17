@@ -10,8 +10,9 @@ class guia extends Model
     use HasFactory;
 
     protected $fillable = [
-        'planificacioncosecha_id',
+        // 'planificacioncosecha_id',
         'empresa_id',
+        'cliente_id',
         'numero',
         'tipo',
         'cantidadKilos',
@@ -21,14 +22,18 @@ class guia extends Model
         'envase_id',
         'vehiculo_id',
         'conductor_id',
+        'campo_id',
     ];
 
     public function empresa(){
         return $this->belongsTo(empresa::class);
     }
-    public function planificacioncosecha(){
-        return $this->belongsTo(planificacioncosecha::class);
+    public function cliente(){
+        return $this->belongsTo(empresa::class);
     }
+    // public function planificacioncosecha(){
+    //     return $this->belongsTo(planificacioncosecha::class);
+    // }
     public function envase(){
         return $this->belongsTo(envase::class);
     }
@@ -37,5 +42,8 @@ class guia extends Model
     }
     public function conductor(){
         return $this->belongsTo(User::class);
+    }
+    public function campo(){
+        return $this->belongsTo(campo::class);
     }
 }

@@ -23,7 +23,7 @@ class CrudBodega extends Component
     public $encargado=array();
     public $open_editBodega=false;
     public $search;
-    public $selectedId;
+    public $selectedId,$acopio;
     public $campos=array();
     public $empresa_id;
     public $nombre,$QrBarra,$marca,$ingredienteActivo,$etiqueta;
@@ -58,6 +58,7 @@ class CrudBodega extends Component
             'bodega'=>$this->bodega,
             'campo_id'=>$this->campo_id,
             'encargado_id'=>$this->encargado_id,
+            'acopio'=>$this->acopio,
             'observacion'=>$this->observacion,
         ]);
         $this->reset(['bodega','observacion']);

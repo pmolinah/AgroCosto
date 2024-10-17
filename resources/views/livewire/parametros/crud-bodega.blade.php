@@ -764,6 +764,19 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class=" p-4 text-neutral-90">
+                                <select
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                                    wire:model.defer='acopio'>
+
+                                        <option class="text-secondary" value=" ">Seleccionar ¿Bodega Acopio de Cosechas?</option>
+                  
+                                        <option class="text-primary" value="0">No</option>
+                                        <option class="text-primary" value="1">Si</option>
+                                      
+              
+                                </select>
+                            </div>
                             <div class="text-left p-4">
                                 Observación
                                 <div class="relative mb-3" data-te-input-wrapper-init>

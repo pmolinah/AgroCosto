@@ -263,6 +263,7 @@
                                         Cosechas Realizadas&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-carrot"></i>
                                     </a>
                                 @endcan
+                                
                             </div>
                         </div>
                     @endcan
@@ -366,6 +367,7 @@
                     <!-- Authentication links -->
                     <div x-data="{ isActive: false, open: false }">
                         <!-- active & hover classes 'bg-neutral-100 dark:bg-neutral-600' -->
+                        @can('Adm.cam.btn')
                         <a href="#" @click="$event.preventDefault(); open = !open"
                             class="flex items-center p-2 text-gray-100 transition-colors rounded-md dark:text-white hover:bg-neutral-600 dark:hover:bg-neutral-900"
                             :class="{ 'bg-neutral-100 bg-neutral-600': isActive || open }" role="button"
@@ -385,6 +387,7 @@
                                 </svg>
                             </span>
                         </a>
+                        @endcan
                         <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
                             <a href="{{ route('Campo.create') }}" role="menuitem"
                                 class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
@@ -395,6 +398,7 @@
                     <!-- Layouts links -->
                     <div x-data="{ isActive: false, open: false }">
                         <!-- active & hover classes 'bg-neutral-100 dark:bg-neutral-600' -->
+                        @can('Adm.cua.btn')
                         <a href="#" @click="$event.preventDefault(); open = !open"
                             class="flex items-center p-2 text-gray-100 transition-colors rounded-md dark:text-white hover:bg-neutral-600 dark:hover:bg-neutral-900"
                             :class="{ 'bg-neutral-100 bg-neutral-600': isActive || open }" role="button"
@@ -414,6 +418,7 @@
                                 </svg>
                             </span>
                         </a>
+                        @endcan
                         <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
                             <a href="{{ route('Cuartel.create') }}" role="menuitem"
                                 class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
@@ -425,6 +430,7 @@
                     <!-- Layouts links -->
                     <div x-data="{ isActive: false, open: false }">
                         <!-- active & hover classes 'bg-neutral-100 dark:bg-neutral-600' -->
+                        @can('Adm.cert.btn')
                         <a href="#" @click="$event.preventDefault(); open = !open"
                             class="flex items-center p-2 text-gray-100 transition-colors rounded-md dark:text-white hover:bg-neutral-600 dark:hover:bg-neutral-900"
                             :class="{ 'bg-neutral-100 bg-neutral-600': isActive || open }" role="button"
@@ -444,6 +450,7 @@
                                 </svg>
                             </span>
                         </a>
+                        @endcan
                         <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
                             <a href="{{ route('Certificacion.index') }}" role="menuitem"
                                 class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
@@ -461,6 +468,7 @@
                     {{-- @can('Adm.plan.est.btn') --}}
                     <div x-data="{ isActive: false, open: false }">
                         <!-- active & hover classes 'bg-neutral-100 dark:bg-neutral-600' -->
+                        @can('Adm.est.prod.btn')
                         <a href="#" @click="$event.preventDefault(); open = !open"
                             class="flex items-center p-2 text-gray-100 transition-colors rounded-md dark:text-white hover:bg-neutral-600 dark:hover:bg-neutral-900"
                             :class="{ 'bg-neutral-100 bg-neutral-600': isActive || open }" role="button"
@@ -480,6 +488,7 @@
                                 </svg>
                             </span>
                         </a>
+                        @endcan
                         <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
                             <a href="{{ route('Create.plan') }}" role="menuitem"
                                 class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
@@ -499,6 +508,7 @@
                     <!-- Layouts links -->
                     <div x-data="{ isActive: false, open: false }">
                         <!-- active & hover classes 'bg-neutral-100 dark:bg-neutral-600' -->
+                        @can('Adm.reg.veh.btn')
                         <a href="#" @click="$event.preventDefault(); open = !open"
                             class="flex items-center p-2 text-gray-100 transition-colors rounded-md dark:text-white hover:bg-neutral-600 dark:hover:bg-neutral-900"
                             :class="{ 'bg-neutral-100 bg-neutral-600': isActive || open }" role="button"
@@ -518,6 +528,7 @@
                                 </svg>
                             </span>
                         </a>
+                        @endcan
                         <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
                             <a href="{{ route('Vehiculos.index') }}" role="menuitem"
                                 class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
@@ -530,6 +541,7 @@
                     <!-- Layouts links -->
                     <div x-data="{ isActive: false, open: false }">
                         <!-- active & hover classes 'bg-neutral-100 dark:bg-neutral-600' -->
+                        @can('Adm.cont.bod.btn')
                         <a href="#" @click="$event.preventDefault(); open = !open"
                             class="flex items-center p-2 text-gray-100 transition-colors rounded-md dark:text-white hover:bg-neutral-600 dark:hover:bg-neutral-900"
                             :class="{ 'bg-neutral-100 bg-neutral-600': isActive || open }" role="button"
@@ -548,6 +560,7 @@
                                 </svg>
                             </span>
                         </a>
+                        @endcan
                         <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
                             <a href="{{ route('bodega.ingreso') }}" role="menuitem"
                                 class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
@@ -567,10 +580,11 @@
                             </a>
                         </div>
                     </div>
-                    {{-- boton planificacion estimada --}}
+                    {{-- boton tareas --}}
                     <!-- Layouts links -->
                     <div x-data="{ isActive: false, open: false }">
                         <!-- active & hover classes 'bg-neutral-100 dark:bg-neutral-600' -->
+                        @can('Adm.adm.tar.btn')
                         <a href="#" @click="$event.preventDefault(); open = !open"
                             class="flex items-center p-2 text-gray-100 transition-colors rounded-md dark:text-white hover:bg-neutral-600 dark:hover:bg-neutral-900"
                             :class="{ 'bg-neutral-100 bg-neutral-600': isActive || open }" role="button"
@@ -589,6 +603,7 @@
                                 </svg>
                             </span>
                         </a>
+                        @endcan
                         <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
                             <a href="{{ route('Tarea.crear') }}" role="menuitem"
                                 class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
@@ -608,11 +623,56 @@
                             </a>
                         </div>
                     </div>
-                    {{-- boton planificacion estimada --}}
+                    {{-- boton tareas --}}
+                    {{-- boton Actividades --}}
+                    <!-- Layouts links -->
+                    <div x-data="{ isActive: false, open: false }">
+                        <!-- active & hover classes 'bg-neutral-100 dark:bg-neutral-600' -->
+                        @can('Adm.fin.cost.btn')
+                        <a href="#" @click="$event.preventDefault(); open = !open"
+                            class="flex items-center p-2 text-gray-100 transition-colors rounded-md dark:text-white hover:bg-neutral-600 dark:hover:bg-neutral-900"
+                            :class="{ 'bg-neutral-100 bg-neutral-600': isActive || open }" role="button"
+                            aria-haspopup="true" :aria-expanded="(open || isActive) ? 'true' : 'false'">
+                            <span aria-hidden="true" class="bg-white rounded-full p-1"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48"><path fill="#455a64" d="M36 4H26c0 1.1-.9 2-2 2s-2-.9-2-2H12C9.8 4 8 5.8 8 8v32c0 2.2 1.8 4 4 4h24c2.2 0 4-1.8 4-4V8c0-2.2-1.8-4-4-4"/><path fill="#fff" d="M36 41H12c-.6 0-1-.4-1-1V8c0-.6.4-1 1-1h24c.6 0 1 .4 1 1v32c0 .6-.4 1-1 1"/><g fill="#90a4ae"><path d="M26 4c0 1.1-.9 2-2 2s-2-.9-2-2h-7v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4z"/><path d="M24 0c-2.2 0-4 1.8-4 4s1.8 4 4 4s4-1.8 4-4s-1.8-4-4-4m0 6c-1.1 0-2-.9-2-2s.9-2 2-2s2 .9 2 2s-.9 2-2 2"/></g><path fill="#4caf50" d="m30.6 18.6l-9 9l-4.2-4.3l-2.5 2.5l6.8 6.7l11.4-11.4z"/></svg>
+                            </span>
+                            <span class="ml-2 text-sm">Actividades y Costos</span>
+                            <span aria-hidden="true" class="ml-auto">
+                                <!-- active class 'rotate-180' -->
+                                <svg class="w-4 h-4 transition-transform transform" :class="{ 'rotate-180': open }"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </a>
+                        @endcan
+                        <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
+                            <a href="{{ route('Parametro.Actividad') }}" role="menuitem"
+                                class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
+                                Parametros&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-plus"></i>
+                            </a>
+                            <a href="{{ route('Registro.Actividad') }}" role="menuitem"
+                                class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
+                                Crea/Asigna/Modifica&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-list"></i>
+                            </a>
+                            <a href="{{ route('Tareas.planificadas') }}" role="menuitem"
+                                class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
+                                Resumen &nbsp;&nbsp;&nbsp;<i class="fa-regular fa-calendar-days"></i>
+                            </a>
+                            <!-- <a href="{{ route('Tareas.finalizadas') }}" role="menuitem"
+                                class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
+                                Tareas Realizadas&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-calendar-check"></i></i>
+                            </a> -->
+                        </div>
+                    </div>
+                    {{-- boton actividades --}}
                     {{-- boton admin cuentas --}}
                     <!-- Layouts links -->
                     <div x-data="{ isActive: false, open: false }">
                         <!-- active & hover classes 'bg-neutral-100 dark:bg-neutral-600' -->
+                        @can('Adm.cuent.env.btn')
                         <a href="#" @click="$event.preventDefault(); open = !open"
                             class="flex items-center p-2 text-gray-100 transition-colors rounded-md dark:text-white hover:bg-neutral-600 dark:hover:bg-neutral-900"
                             :class="{ 'bg-neutral-100 bg-neutral-600': isActive || open }" role="button"
@@ -631,6 +691,7 @@
                                 </svg>
                             </span>
                         </a>
+                        @endcan
                         <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
                             <!-- active & hover classes 'text-gray-700 dark:text-light' -->
                             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
@@ -651,6 +712,7 @@
                     <!-- Layouts links -->
                     <div x-data="{ isActive: false, open: false }">
                         <!-- active & hover classes 'bg-neutral-100 dark:bg-neutral-600' -->
+                        @can('Adm.conf.env.btn')
                         <a href="#" @click="$event.preventDefault(); open = !open"
                             class="flex items-center p-2 text-gray-100 transition-colors rounded-md dark:text-white hover:bg-neutral-600 dark:hover:bg-neutral-900"
                             :class="{ 'bg-neutral-100 bg-neutral-600': isActive || open }" role="button"
@@ -669,6 +731,7 @@
                                 </svg>
                             </span>
                         </a>
+                        @endcan
                         <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
                             <!-- active & hover classes 'text-gray-700 dark:text-light' -->
                             <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
@@ -685,6 +748,7 @@
                     <!-- Layouts links -->
                     <div x-data="{ isActive: false, open: false }">
                         <!-- active & hover classes 'bg-neutral-100 dark:bg-neutral-600' -->
+                        @can('Adm.cier.temp.btn')
                         <a href="#" @click="$event.preventDefault(); open = !open"
                             class="flex items-center p-2 text-gray-100 transition-colors rounded-md dark:text-white hover:bg-neutral-600 dark:hover:bg-neutral-900"
                             :class="{ 'bg-neutral-100 bg-neutral-600': isActive || open }" role="button"
@@ -703,6 +767,7 @@
                                 </svg>
                             </span>
                         </a>
+                        @endcan
                         <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
                             <a href="{{ route('CierreInicioTemporada.index') }}" role="menuitem"
                                 class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
@@ -716,6 +781,7 @@
                                         <!-- Layouts links -->
                     <div x-data="{ isActive: false, open: false }">
                         <!-- active & hover classes 'bg-neutral-100 dark:bg-neutral-600' -->
+                        @can('Adm.bod.item.btn')
                         <a href="#" @click="$event.preventDefault(); open = !open"
                             class="flex items-center p-2 text-gray-100 transition-colors rounded-md dark:text-white hover:bg-neutral-600 dark:hover:bg-neutral-900"
                             :class="{ 'bg-neutral-100 bg-neutral-600': isActive || open }" role="button"
@@ -734,6 +800,7 @@
                                 </svg>
                             </span>
                         </a>
+                        @endcan
                         <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
                             <a href="{{ route('BodegaItem.show') }}" role="menuitem"
                                 class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
@@ -774,7 +841,7 @@
             <!-- Main content -->
           <main class="flex-1 p-1 bg-white bg-cover bg-center h-screen" style="background-image: url('{{ asset('storage/fondo.png') }}');">
           
-            <div class="bg-white bg-opacity-80 h-screen">
+            <div class="bg-white bg-opacity-80 h-screen p-1">
             {{-- <main class="flex-1 p-1 bg-white bg-no-repeat bg-center bg-cover" style="background-image: url('{{ asset('storage/logoAgroges.png') }}');" > --}}
                 {{ $slot }}
                 <!-- component -->
