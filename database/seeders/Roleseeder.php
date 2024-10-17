@@ -144,7 +144,7 @@ class Roleseeder extends Seeder
                 Permission::create(['name'=>'Adm.cier.temp.btn','description'=>'Boton para Acceder a Cierre de Temporada'])->assignRole([$role1]);
                 Permission::create(['name'=>'Adm.bod.item.btn','description'=>'Boton para Acceder a Creación de Bodega e Items'])->assignRole([$role1]);
                 Permission::create(['name'=>'Adm.cam.btn','description'=>'Boton para Acceder a Creación Campos'])->assignRole([$role1]);
-                Permission::create(['name'=>'Adm.cua.btn','description'=>'Boton para Acceder a Creación de Cuarteles'])->assignRole([$role1]);
+                Permission::create(['name'=>'Adm.cua.btn','description'=>'Boton para Acceder a Creación de Cuarteles.'])->assignRole([$role1]);
         
         
                 $tipousuario=tipousuario::create([
