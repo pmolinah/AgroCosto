@@ -78,7 +78,6 @@ class RegistroActividades extends Component
     }
     public function AgregarCosto(){
         if($this->actividad_id!=NULL && $this->tipoActividad_id!=NULL && $this->cantidad!=NULL && $this->costo!=NULL && $this->costoUnitario){
-
                 $buscarPivote=costoactividad::where('pivote',$this->actividad_id.$this->tipoActividad_id)->first();
                 if($buscarPivote){
                     $this->dispatchBrowserEvent('ErrorYaExiste', [
@@ -88,6 +87,7 @@ class RegistroActividades extends Component
                     ]);
                     return back();
                 }
+                //dd($this->costoUnitario);
             costoactividad::create([
                 'actividad_id'=>$this->actividad_id,
                 'tipoactividad_id'=>$this->tipoActividad_id,

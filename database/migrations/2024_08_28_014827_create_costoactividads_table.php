@@ -19,9 +19,9 @@ return new class extends Migration
             $table->integer('costo');
             $table->bigInteger('tipoactividad_id')->unsigned();
             $table->foreign('tipoactividad_id')->references('id')->on('tipoactividads');
-            $table->float('cantidad');
-            $table->float('costoUnidad');
-            $table->float('avance');
+            $table->double('cantidad');
+            $table->double('costoUnidad');
+            $table->double('avance');
             $table->bigInteger('tipocosto_id')->unsigned();
             $table->foreign('tipocosto_id')->references('id')->on('tipocostos');
             $table->bigInteger('pivote')->unsigned();

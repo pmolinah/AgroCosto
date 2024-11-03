@@ -11,23 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipoactividads', function (Blueprint $table) {
+        Schema::create('bancos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('tipo');
-            $table->string('unidadMedida')->nullable();
-            $table->float('medida')->nullable();
-            $table->string('referencia')->nullable();
-
-
+            $table->string('banco',150);
+            $table->string('contacto',200)->nullable();
+            $table->string('mail')->nullable();
+            $table->string('telefono',50)->nullable();
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipoactividads');
+        Schema::dropIfExists('bancos');
     }
 };

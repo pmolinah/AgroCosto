@@ -162,4 +162,7 @@ Route::get('/', function () {
     //Actividades
     Route::get('/Registro/Actividades',[ActividadesController::class, 'RegistroActividad'])->name('Registro.Actividad');
     Route::get('/Parametros/Actividades',[ActividadesController::class, 'ParametrosActividades'])->name('Parametro.Actividad');
+    Route::get('/conciliacion',[ActividadesController::class, 'conciliacion'])->name('conciliacion');
+    Route::get('/informa/contable',[ActividadesController::class, 'informecontable'])->name('informe.contable');
+
 });

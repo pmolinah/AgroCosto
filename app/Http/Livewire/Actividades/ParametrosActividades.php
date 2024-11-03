@@ -12,7 +12,7 @@ class ParametrosActividades extends Component
     public $tipoactividades=[];
     public $tipo,$referencia,$unidadMedida,$medida,$tipocosto_id;
     public function guardarTipo(){
-        if($this->tipo==NULL || $this->referencia==NULL || $this->unidadMedida==NULL || $this->tipocosto_id==NULL){
+        if($this->tipo==NULL || $this->tipocosto_id==NULL){ //|| $this->referencia==NULL || $this->unidadMedida==NULL
             $this->dispatchBrowserEvent('ErrorFaltanDatos', [
                 'title' => 'Error, Faltan Datos.',
                 'icon'=>'error',

@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipoactividads', function (Blueprint $table) {
+        Schema::create('historicos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('tipo');
-            $table->string('unidadMedida')->nullable();
-            $table->float('medida')->nullable();
-            $table->string('referencia')->nullable();
-
+            $table->bigInteger('cuenta_id')->unsigned();
+            $table->foreign('cuenta_id')->references('id')->on('cuentas');
+            $table->integer('saldo_inicial');
+            $table->integer('saldo_real');
+            $table->date('fecha');
 
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipoactividads');
+        Schema::dropIfExists('historicos');
     }
 };

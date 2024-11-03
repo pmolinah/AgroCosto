@@ -32,11 +32,11 @@
 
                             </select>
                         </div>
-                        <div class="col-span-5 p-2">
+                        <!-- <div class="col-span-5 p-2">
                             Medida
                             <input type="text" wire:model.defer="medida"
                             class="h-8 border rounded px-4 w-full bg-gray-50">
-                        </div>
+                        </div> -->
                         <div class="col-span-5 p-2">
                         Tipo Costo
                             <select wire:model.defer="tipocosto_id"
@@ -48,7 +48,7 @@
 
                             </select>
                         </div>
-                        <div class="col-span-5 p-2">
+                        <!-- <div class="col-span-5 p-2">
                             Referencia
                             <select wire:model.defer="referencia"
                                 class="h-8 border rounded px-4 w-full bg-gray-50">
@@ -62,7 +62,7 @@
                     
 
                             </select>
-                        </div>
+                        </div> -->
                        
 
                         <div class="col-span-10">

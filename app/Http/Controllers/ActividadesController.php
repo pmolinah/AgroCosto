@@ -12,4 +12,10 @@ class ActividadesController extends Controller
     public function ParametrosActividades(){
         return view('actividades.parametrosActividades');
     }
+    public function conciliacion(){
+        return view('cuentas.conciliacion');
+    }
+    public function informecontable(){
+        return view('cuentas.informecontable');
+    }
 }
