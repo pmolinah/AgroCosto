@@ -37,4 +37,7 @@ class movimiento extends Model
     public function detallemovimiento(){
         return $this->hasMany(detallemovimiento::class);
     }
+    public function cuartel(){
+        return $this->belongsTo(cuartel::class);
+    }
 }

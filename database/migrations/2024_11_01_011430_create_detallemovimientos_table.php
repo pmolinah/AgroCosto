@@ -19,7 +19,12 @@ return new class extends Migration
             $table->bigInteger('item_id')->unsigned();
             $table->foreign('item_id')->references('id')->on('items');
             $table->double('cantidad')->nullable();
+            $table->double('contenido')->nullable();
             $table->double('precio')->nullable();
+            $table->string('presentacion',100)->nullable();
+            $table->date('vencimiento')->nullable();
+            $table->bigInteger('lineaInventario_id')->nullable();
+            $table->bigInteger('lineaDerIngresoBodega_id')->nullable();
         });
     }
 

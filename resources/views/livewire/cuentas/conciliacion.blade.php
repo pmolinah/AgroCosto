@@ -214,113 +214,8 @@
                                 class="mr-5">{{$cuartel->observaciones}}</label><br />
                         @endforeach
                     </div>
-                    <!-- <div class="col-span-1 mt-2">
-                        <label class="p-1 font-medium">Hectareas</label>
-                    </div>
-                    <div class="col-span-1 mt-2">
-                        <label class="text-red-800 font-bold"></label>
-                    </div>
-                    <div class="col-span-1 mt-2">
-                        <label class="p-1 font-medium">Especie</label>
-                    </div>
-                    <div class="col-span-2 mt-2">
-                        <label class="text-red-800 font-bold"></label>
-                    </div>
-                    <div class="col-span-1 mt-2">
-                        <label class="p-1 font-medium">Variedad</label>
-                    </div>
-                    <div class="col-span-2 mt-2">
-                        <label class="text-red-800 font-bold"></label>
-                    </div>
-                    <div class="col-span-2 mt-2">
-                        <label class="p-1 font-medium">Cantidad Plantada</label>
-                    </div>
-                    <div class="col-span-1 mt-2">
-                        <label class="text-red-800 font-bold"></label>
-                    </div> -->
-
-
-
-                    <!-- <div class="col-span-2 text-right mt-2 p-1">
-                        <label class="p-1 font-medium">Dirección</label>
-                    </div>
-                    <div class="col-span-3 mt-1">
-                        <input type="text" class="uppercase h-10 border mt-1 rounded px-4 w-full bg-gray-200" value=""
-                            wire:model.defer="DireccionCampo">
-                    </div>
-                    <div class="col-span-7">
-                    </div>
-                    <div class="col-span-2 text-right mt-2 p-1">
-                        <label class="p-1 font-medium">Fecha</label>
-                    </div>
-                    <div class="col-span-3 mt-1">
-                        <input type="text" class="uppercase h-10 border mt-1 rounded px-4 w-full bg-gray-200" value="">
-                    </div> -->
-
-                    {{-- datos exportadora --}}
-                    <!-- <div class="col-span-1 mt-7 p-1 text-left">
-                        <label class="p-1 font-medium">Rut</label>
-                    </div>
-                    <div class="col-span-1 mt-6">
-                        <input type="text" class="uppercase h-10 border mt-1 rounded px-4 w-full bg-gray-200" value="">
-                    </div>
-                    <div class="col-span-1 mt-7 p-1">
-                        <label class="p-1 font-medium">Exportadora</label>
-                    </div>
-                    <div class="col-span-4 mt-6">
-                        <input type="text" class="uppercase h-10 border mt-1 rounded px-4 w-full bg-gray-200" value="">
-                    </div>
-                    <div class="col-span-1 mt-8 p-1">
-                        <label class="p-1 font-medium">Dirección</label>
-                    </div>
-                    <div class="col-span-4 mt-6">
-                        <input type="text" class="uppercase h-10 border mt-1 rounded px-4 w-full bg-gray-200" value="">
-                    </div>
-                    <div class="col-span-1 mt-2 p-1 text-left">
-                        <label class="p-1 font-medium">Comuna</label>
-                    </div>
-                    <div class="col-span-4 mt-1">
-                        <input type="text" class="uppercase h-10 border mt-1 rounded px-4 w-full bg-gray-200" value="">
-                    </div>
-                    <div class="col-span-1 mt-2 p-1">
-                        <label class="p-1 font-medium">Email</label>
-                    </div>
-                    <div class="col-span-6 mt-1">
-                        <input type="text" class="uppercase h-10 border mt-1 rounded px-4 w-full bg-gray-200" value="">
-                    </div>
-                    <div class="col-span-1 mt-2 p-1 text-left">
-                        <label class="p-1 font-medium">Giro</label>
-                    </div>
-                    <div class="col-span-8 w-96 mt-1">
-                        <input type="text" class="uppercase h-10 border mt-1 rounded px-4 w-full bg-gray-200" value="">
-                    </div>
-                    <div
-                        class="col-span-6 p-2 ml-1 mt-2 h-10 bg-gray-100 flex border border-gray-200 rounded items-center mt-1">
-                        <select wire:model.defer="conductor_id"
-                            class="px-4 py-2 appearance-none outline-none text-gray-800 w-full bg-transparent">
-                            <option>Seleccionar Conductor</option>
-
-                            <option value=""></option>
-
-                        </select>
-                    </div>
-                    <div
-                        class="col-span-6 p-2 ml-1 mt-2 h-10 bg-gray-100 flex border border-gray-200 rounded items-center mt-1">
-
-                        <select wire:model.defer="vehiculo_id"
-                            class="px-4 py-2 appearance-none outline-none text-gray-800 w-full bg-transparent">
-                            <option>Seleccionar Vehículo</option>
-
-                            <option value=""></option>
-
-                        </select>
-                    </div>
-                    <div class="col-start-5  col-span-3  text-right mt-1 p-2">
-                        <button type="button" wire:click="AgregarGuiaRecepcion"
-                            class="bg-gray-500 text-white  py-2 px-4 w-full rounded hover:bg-gray-600">
-                            Guardar para Agregar Detalle
-                        </button>
-                    </div> -->
+                   
+                  
                     {{-- <div class="col-start-10  col-span-3  text-right mt-1 p-2">
                     <button type="button" wire:click="" class="inline-block rounded bg-danger px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#14a44d] transition duration-150 ease-in-out hover:bg-success-600 hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] focus:bg-success-600 focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] focus:outline-none focus:ring-0 active:bg-success-700 active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(20,164,77,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)]">
                         Eliminar Guía de Recepción
@@ -710,7 +605,6 @@
                                 <h2 class="text-xl font-semibold text-gray-700">Detalle del Movimiento cargado o abonado
                                     de la factura o guía</h2>
                             </div>
-
                             <!-- Contenido del Modal -->
                             <div class="p-4">
                                 <!-- component -->
@@ -773,7 +667,6 @@
                                                 <td class="px-6 py-4 text-center">
                                                     <a href="#" wire:click="eliminaSumaDetalle( {{$detalle->id }})"><i
                                                             class="fa-solid fa-trash red-700 mr-5"></i></a>
-                                                    <!-- <i class="fa-solid fa-plus"></i> -->
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -888,7 +781,7 @@
 
                             <!-- Pie de Modal con botones -->
                             <div class="flex justify-end px-4 py-3 border-t">
-                                <button onclick="toggleModal()"
+                                <button onclick="toggleModalActualizar()"
                                     class="px-4 py-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300">Salir</button>
                                 <!-- <button
                                         class="px-4 py-2 ml-2 text-white bg-blue-600 rounded hover:bg-blue-700">Aceptar</button> -->
@@ -912,20 +805,20 @@
                         document.getElementById('modal').classList.toggle('hidden');
                     }
 
-                    function toggleModal() {
+                    function toggleModalActualizar() {
                         document.getElementById('modalActualizar').classList.toggle('hidden');
                     }
                     </script>
-                    <script>
+                    <!-- <script>
                     Livewire.on('closeModal', () => {
                         document.getElementById('modal').classList.add('hidden');
                     });
-                    </script>
-                    <script>
+                    </script> -->
+                    <!-- <script>
                     Livewire.on('closeModal', () => {
                         document.getElementById('modalActualizar').classList.add('hidden');
                     });
-                    </script>
+                    </script> -->
                 </div>
 
             </div>
