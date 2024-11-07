@@ -25,6 +25,8 @@ return new class extends Migration
             $table->date('vencimiento')->nullable();
             $table->bigInteger('lineaInventario_id')->nullable();
             $table->bigInteger('lineaDerIngresoBodega_id')->nullable();
+            $table->bigInteger('bodega_id')->unsigned();
+            $table->foreign('bodega_id')->references('id')->on('bodegas');
         });
     }
 

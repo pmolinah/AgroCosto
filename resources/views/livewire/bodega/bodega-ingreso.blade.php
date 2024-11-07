@@ -2,6 +2,13 @@
     <div class="text-left w-full rounded-xl border border-gray-200 bg-white py-2 px-2 shadow-md shadow-neutral-800">
         <div class="flex items-center justify-between px-2 text-base font-medium text-gray-700">
             <div>Ingreso Item, Factura o Guia de Despacho.</div>
+            <select wire:model.defer="proveedor_id" wire:change="SeleccionProveedor_id"
+                            class=" block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                            <option>Seleccionar Factura o Guía no Emitida</option>
+                            @foreach ($ingresobodegas as $ingresobodega)
+                                <option value="{{ $ingresobodega->id }}">{{ $ingresobodega->id }}</option>
+                            @endforeach
+                        </select>
         </div>
         <div class="mt-2">
             <div class="flex max-h-[600px] w-full flex-col overflow-y-scroll">

@@ -59,8 +59,8 @@ class CampoController extends Controller
      */
     public function update(Request $request)
     {
-      
-        $act=campo::where('id',$request->id)->update(['campo'=>$request->campo,'direccion'=>$request->direccion,'superficie'=>$request->superficie,'comuna_id'=>$request->comuna_id]);
+   
+        $act=campo::where('id',$request->id)->update(['campo'=>$request->campo,'direccion'=>$request->direccion,'superficie'=>$request->superficie,'comuna_id'=>$request->comuna_id,'codigoSag'=>$request->codigoSag,'rut'=>$request->rut]);
         Session::flash('success', 'Campo Actualizado Correctamente');
         return back();
     }

@@ -181,15 +181,6 @@ class BodegaItemsController extends Controller
             PDF::SetFillColor(253, 254, 254);
             PDF::MultiCell(70, 4, $guiaRecep->proveedor->id, 1, 'C', 1, 0, '', '', true);
             PDF::Ln(4);
-            // PDF::SetFillColor(229, 231, 233);
-            // PDF::MultiCell(16, 4, 'Conductor', 1, 'C', 1, 0, 11, '', true);
-            // PDF::SetFillColor(253, 254, 254);
-            // PDF::MultiCell(90, 4, $guiaRecep->conductor->name, 1, 'C', 1, 0, '', '', true);
-            // PDF::SetFillColor(229, 231, 233);
-            // PDF::MultiCell(13, 4, 'Patente', 1, 'C', 1, 0, 114, '', true);
-            // PDF::SetFillColor(253, 254, 254);
-            // PDF::MultiCell(70, 4, $guiaRecep->vehiculo->patente, 1, 'C', 1, 0, '', '', true);
-            // PDF::Ln(3);
             PDF::SetFont('Helvetica', '', 10);
             PDF::Write(0, '_______________________________________________________________________________________________');
             PDF::Ln(8);
@@ -221,7 +212,7 @@ class BodegaItemsController extends Controller
                 PDF::MultiCell(12, 4, ($detalle->cantidad*$detalle->precioUnitario), 1, 'L', 1, 0, '', '', true);
                 PDF::Ln(4);
             }
-            PDF::Output('Guia_recepcion_numero'.$guiaRecep->numero.'pdf');
+            PDF::Output('Guia_recepcion_numero_' . $guiaRecep->numero . '.pdf', 'D');
         }
     }
     public function BodegaEgreso(){

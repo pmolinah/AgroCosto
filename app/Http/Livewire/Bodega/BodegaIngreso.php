@@ -17,7 +17,7 @@ class BodegaIngreso extends Component
     public $visible=true;
     public $campoLista=[];
     public $bodegas=[];
-    public $detalleIngresos=[];
+    public $detalleIngresos=[],$ingresobodegas=[];
     public $vencimiento;
     public $filtro;
     public $item_id=0;
@@ -174,12 +174,6 @@ class BodegaIngreso extends Component
                 $this->total=($detalleIngresoBodega->cantidad*$detalleIngresoBodega->item->contenido);
                 $buscarEnInventario=inventario::where('pivote',$this->pivote)->increment('cantidad',$detalleIngresoBodega->cantidad);
                 $buscarEnInventario=inventario::where('pivote',$this->pivote)->increment('contenidoTotal',$this->total);
-                // $this->dispatchBrowserEvent('GuardadoCorrecto', [
-                //     'title' => 'Registro, Guardado.',
-                //     'icon'=>'success',
-                //     'iconColor'=>'blue',
-                // ]);
-                // return redirect()->route('bodega.ingreso');
             }else{
                 if($detalleIngresoBodega->item->unidadMedida==1 || $detalleIngresoBodega->item->unidadMedida==2){
                     $this->total=$detalleIngresoBodega->cantidad*($detalleIngresoBodega->contenido*1000);
@@ -225,6 +219,7 @@ class BodegaIngreso extends Component
         $items=item::all();
         $proveedores=empresa::where('tipo_id',2)->get();
         $empresas=empresa::where('tipo_id',1)->get();
+        $this->ingresobodegas=ingresobodega::where('emitida',NULL)->get();
         
         return view('livewire.bodega.bodega-ingreso',compact('items','ItemsBuscador','proveedores','empresas'));
     }

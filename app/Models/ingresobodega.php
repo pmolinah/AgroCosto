@@ -18,6 +18,7 @@ class ingresobodega extends Model
         'total',
         'pivote',
         'observacion',
+        'emitida'
     ];
 
     public function detingresobodega(){

@@ -214,8 +214,8 @@
                                 class="mr-5">{{$cuartel->observaciones}}</label><br />
                         @endforeach
                     </div>
-                   
-                  
+
+
                     {{-- <div class="col-start-10  col-span-3  text-right mt-1 p-2">
                     <button type="button" wire:click="" class="inline-block rounded bg-danger px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#14a44d] transition duration-150 ease-in-out hover:bg-success-600 hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] focus:bg-success-600 focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] focus:outline-none focus:ring-0 active:bg-success-700 active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(20,164,77,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)]">
                         Eliminar Guía de Recepción
@@ -278,7 +278,7 @@
                                             <i class="fa-solid fa-search"></i>
                                         </a></td>
                                 </tr>
-                              
+
                             </tbody>
                         </table>
                     </div>
@@ -294,7 +294,7 @@
                                     <td class="w-28 font-bold mt-3 border-2 px-6">Tipo</td>
                                     <td class="w-24 font-bold text-center mt-3 border-2">monto Ejecutado</td>
                                     <td class="w-24 font-bold text-center mt-3 border-2">monto Pendiente</td>
-                                  
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -308,7 +308,7 @@
                                     <td class="w-24 font-bold text-center mt-3 border-2">
                                         {{$totalCargosPendiente}}
                                     </td>
-                                   
+
                                 </tr>
                                 <tr class="mt-3 border-2">
                                     <td class="w-28 font-bold mt-3 border-2 ">
@@ -321,9 +321,9 @@
                                         {{$totalAbonosPendiente}}
                                     </td>
 
-                                 
+
                                 </tr>
-                               
+
                             </tbody>
                         </table>
                     </div>
@@ -504,13 +504,13 @@
                                         <select wire:model.defer="formapago_id"
                                             class="w-24 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                             <option>Seleccionar</option>
-
-                                            <option value="1">Efectivo</option>
-                                            <option value="2">Transferencia</option>
+                                            <option value="1">Guia Despacho</option>
+                                            <option value="2">Factura</option>
                                             <option value="3">Cheque</option>
                                             <option value="4">Deposito</option>
                                             <option value="5">Pago Web</option>
-
+                                            <option value="6">Efectivo</option>
+                                            <option value="7">Transferencia</option>
                                         </select>
                                     </td>
 
@@ -606,73 +606,99 @@
                                     de la factura o guía</h2>
                             </div>
                             <!-- Contenido del Modal -->
-                            <div class="p-4">
+                            <div class="p-2">
                                 <!-- component -->
-                                <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
+                                <div class=" rounded-lg border border-gray-200 shadow-md m-1">
                                     <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
                                         <thead class="bg-gray-100">
                                             <tr>
-                                                <th scope="col" class="px-6 py-2 font-medium text-gray-900">Detalle</th>
-                                                <th scope="col" class="px-6 py-2 font-medium text-gray-900">Cantidad
-                                                </th>
-                                                <th scope="col" class="px-6 py-2 font-medium text-gray-900">Precio</th>
-                                                <th scope="col" class="px-6 py-2 font-medium text-gray-900">Total</th>
-                                                <th scope="col" class="px-6 py-2 font-medium text-gray-900 text-center">
-                                                    Acciones
-                                                </th>
+                                                <th class="py-2 text-gray-900">Bodega Destino</th>
+                                                <th class="py-2 text-gray-900">Producto/Item</th>
+                                                <th class="py-2 text-gray-900">U.Med.</th>
+                                                <th class="py-2 font-medium text-gray-900">Presentación</th>
+                                                <th class="py-2 font-medium text-gray-900">Con./K/L/U</th>
+                                                <th class="py-2 font-medium text-gray-900">Cantidad</th>
+                                                <th class="py-2 font-medium text-gray-900">Precio</th>
+                                                <th class="py-2 font-medium text-gray-900">Vencimiento</th>
+                                                <th class="py-2 font-medium text-gray-900 text-center">Gbr</th>
                                             </tr>
                                             <tr>
-                                                <th scope="col" class="px-6 mb-3 font-medium text-gray-900">
-                                                    <select wire:model.defer="ite"
+                                                <td class="mb-3 text-gray-900">
+                                                    <select wire:model.defer="bodega_id"
                                                         class="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                                         <option>Seleccionar</option>
-                                                        @foreach($items as $item)
-                                                        <option value="{{$item->id}}">{{$item->nombre}}</option>
+                                                        @foreach($bodegas as $bodega)
+                                                        <option value="{{$bodega->id}}">{{$bodega->bodega}}</option>
                                                         @endforeach
-
                                                     </select>
-                                                </th>
-                                                <th scope="col" class="px-6  font-medium text-gray-900"><input
-                                                        type="text" class=" w-20 border-2" wire:model.defer="can"></th>
-                                                <th scope="col" class="px-6  font-medium text-gray-900"><input
-                                                        type="text" class=" w-20 border-2" wire:model.defer="pre"></th>
-                                                <th scope="col" class="px-6  font-medium text-gray-900"><input
-                                                        type="text" class=" w-20 border-2" wire:model.defer="tot"></th>
-                                                <th scope="col" class="px-6  font-medium text-gray-900 text-center"><a
-                                                        href="#" wire:click="sumaDetalle"><i
-                                                            class="fa-solid fa-plus"></i></a>
-                                                </th>
+                                                </td>
+                                                <td class="mb-3 text-gray-900">
+                                                    <select wire:model.defer="item_id" wire:change="CambiaSeleccionItem"
+                                                        class="inline-block w-72 rounded-md border-0 py-1.5 text-center text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                                        <option>Items</option>
+                                                        @foreach ($items as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class="mb-3 text-gray-900">
+                                                    <select wire:model.defer="unidadMedida"
+                                                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                                        <option value="0">L/K/U/M</option>
+                                                        <option value="1">LITRO</option>
+                                                        <option value="2">KILO</option>
+                                                        <option value="3">UNIDAD</option>
+                                                        <option value="4">METROS</option>
+                                                    </select>
+                                                </td>
+                                                <td class="text-left text-gray-900 py-1.5"><input type="text"
+                                                        class="w-full" wire:model.defer="presentacion"></td>
+                                                <td class="text-gray-900 py-1.5"><input type="text" class="w-16"
+                                                        wire:model.defer="contenido"></td>
+                                                <td class="text-gray-900"><input type="text" class="w-16"
+                                                        wire:model.defer="cantidad"></td>
+                                                <td class="text-gray-900"><input type="text" class="w-16"
+                                                        wire:model.defer="precio"></td>
+                                                <td class="text-gray-900"><input type="date" class="w-18"
+                                                        wire:model.defer="vencimiento"></td>
+                                                <td class="text-gray-900 text-center"><a href="#"
+                                                        wire:click="sumaDetalle"><i class="fa-solid fa-plus"></i></a>
+                                                </td>
                                             </tr>
                                         </thead>
                                         <tbody class="divide-y divide-gray-100 border-t border-gray-100">
                                             @if (isset($detalleMovimiento))
                                             @foreach($detalleMovimiento as $detalle)
                                             <tr class="hover:bg-gray-50">
-                                                <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
-                                                    {{$detalle->item->nombre}}
-                                                </th>
-                                                <td class="px-6 py-4">
-                                                    <span
-                                                        class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600">
-                                                        <span class="h-1.5 w-1.5 rounded-full bg-green-600"></span>
-                                                        {{$detalle->cantidad}}
-                                                    </span>
+                                                <td class="px-6 py-4 text-gray-900">{{$detalle->bodega->bodega}}</td>
+                                                <td class="px-6 py-4 text-gray-900">{{$detalle->item->nombre}}</td>
+                                                <td class="px-6 py-4 text-gray-900">
+                                                    @if ($detalle->item->unidadMedida == 0)
+                                                    N/A
+                                                    @elseif($detalle->item->unidadMedida == 1)
+                                                    LITRO
+                                                    @elseif($detalle->item->unidadMedida == 2)
+                                                    KILO
+                                                    @elseif($detalle->item->unidadMedida == 3)
+                                                    UNIDAD
+                                                    @else
+                                                    METROS
+                                                    @endif
                                                 </td>
+                                                <td class="px-6 py-4 text-gray-900">{{$detalle->presentacion}}</td>
+                                                <td class="px-6 py-4 text-gray-900">{{$detalle->contenido}}</td>
+                                                <td class="px-6 py-4 text-gray-900">{{$detalle->cantidad}}</td>
                                                 <td class="px-6 py-4">{{$detalle->precio}}</td>
-                                                <td class="px-6 py-4">
-                                                    <div class="flex gap-2">
-                                                        @php echo $detalle->precio*$detalle->cantidad @endphp
-                                                    </div>
-                                                </td>
-                                                <td class="px-6 py-4 text-center">
-                                                    <a href="#" wire:click="eliminaSumaDetalle( {{$detalle->id }})"><i
-                                                            class="fa-solid fa-trash red-700 mr-5"></i></a>
-                                                </td>
+                                                <td class="px-6 py-4 text-gray-900">{{$detalle->vencimiento}}</td>
+                                                <td class="px-6 py-4 text-center"><a href="#"
+                                                        wire:click="eliminaSumaDetalle({{$detalle->id}})"><i
+                                                            class="fa-solid fa-trash red-700 mr-5"></i></a></td>
                                             </tr>
                                             @endforeach
                                             @endif
                                         </tbody>
                                     </table>
+
                                 </div>
                             </div>
 
@@ -692,7 +718,8 @@
                         <div class="bg-white rounded-lg shadow-lg w-3/4">
                             <!-- Encabezado del Modal -->
                             <div class="px-4 py-3 border-b text-left">
-                                <h2 class="text-xl font-semibold text-gray-700">Actualización de Movimiento, Cuenta {{$this->actualizarCuenta}}</h2>
+                                <h2 class="text-xl font-semibold text-gray-700">Actualización de Movimiento, Cuenta
+                                    {{$this->actualizarCuenta}}</h2>
                             </div>
 
                             <!-- Contenido del Modal -->
@@ -718,10 +745,10 @@
                                                     Acciones
                                                 </th>
                                             </tr>
-                                          
+
                                         </thead>
                                         <tbody class="divide-y divide-gray-100 border-t border-gray-100">
-                                        
+
                                             <tr class="hover:bg-gray-50">
                                                 <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
                                                     {{$actualizarFecha}}
@@ -755,25 +782,29 @@
                                                     <select wire:model.defer="actualizarFormaPago"
                                                         class="w-24 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                                         <option>Seleccionar</option>
-                                                        <option value="1">Efectivo</option>
-                                                        <option value="2">Transferencia</option>
+                                                        <option>Seleccionar</option>
+                                                        <option value="1">Guia Despacho</option>
+                                                        <option value="2">Factura</option>
                                                         <option value="3">Cheque</option>
                                                         <option value="4">Deposito</option>
                                                         <option value="5">Pago Web</option>
+                                                        <option value="6">Efectivo</option>
+                                                        <option value="7">Transferencia</option>>
                                                     </select>
                                                 </td>
                                                 <td class="px-6 py-4"><input type="text" class=" w-20 border-2"
                                                         wire:model.defer="actualizarDocumento">
                                                 </td>
-                                                <td class="px-6 py-4"><input type="text" class=" w-20 border-2" 
+                                                <td class="px-6 py-4"><input type="text" class=" w-20 border-2"
                                                         wire:model.defer="actualizarImporte">
                                                 </td>
                                                 <td class="px-6 py-4 text-center">
                                                     <a href="#"
-                                                        wire:click="ActualizarMovimiento( {{$actualizarID }})"><i class="fa-solid fa-rotate-right"></i></a>
+                                                        wire:click="ActualizarMovimiento( {{$actualizarID }})"><i
+                                                            class="fa-solid fa-rotate-right"></i></a>
                                                 </td>
                                             </tr>
-                                        
+
                                         </tbody>
                                     </table>
                                 </div>

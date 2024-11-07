@@ -14,7 +14,7 @@
                     <thead>
                         <tr>
                             <th>Tipo Documento.</th>
-                            <th>Guía N°</th>
+                            <th>N° Fact/Guía </th>
                             <th>Fechas Emisión</th>
                             <th>Campo</th>
                             <th>proveedor</th>

@@ -14,8 +14,16 @@ class detallemovimiento extends Model
         'movimiento_id',
         'cantidad',
         'precio',
+        'presentacion',
+        'bodega_id',
+        'contenido',
+        'vencimiento',
+        'lineaInventario_id'
     ];
     public function item(){
         return $this->belongsTo(item::class);
+    }
+    public function bodega(){
+        return $this->belongsTo(bodega::class);
     }
 }
