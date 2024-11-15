@@ -148,6 +148,7 @@ Route::get('/', function () {
     Route::get('/Registro/{documento_id}/Ingreso',[BodegaItemsController::class, 'IngresoBodegaPDF'])->name('registro.bodega.ingreso');
     Route::get('/Registro/{documento_id}/Egreso',[BodegaItemsController::class, 'EgresoBodegaPDF'])->name('registro.bodega.egreso');
     Route::get('/Edit/ingreso/salida/{factura_id}/bodega', [BodegaItemsController::class, 'editIngSal'])->name('edit.ingreso.salida');
+    Route::get('/Control/peso',[BodegaItemsController::class, 'controlpeso'])->name('controlpeso');
 
     //tareas
     Route::get('/Crear/Tareas',[TareasController::class, 'CrearTarea'])->name('Tarea.crear');

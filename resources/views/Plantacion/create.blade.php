@@ -2,7 +2,7 @@
     <div class="py-2">
         <div class=" ml-5">
             <h1 class="text-left text-xl font-medium ">
-                Formulario de Plantación de Especies
+                Formulario de Plantación de Especies.
             </h1>
         </div>
         <form action="{{ route('Plantacion.store') }}" method="post">
@@ -99,7 +99,9 @@
                             </option>
                         @endforeach
                     </select>
+                <div>Hilera</div><div>SobreHilera</div>
                 </div>
+                
                 <div class="col-span-2 bg-white rounded-lg shadow-lg text-left p-2">
                     <label class="block text-sm font-medium leading-6 text-neutral-900 font-bold text-center">Fecha
                         Plantación</label>

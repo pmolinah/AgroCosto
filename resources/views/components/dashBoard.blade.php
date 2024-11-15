@@ -579,6 +579,12 @@
                                     class="fa-solid fa-warehouse"></i>&nbsp;&nbsp;&nbsp;<i
                                     class="fa-solid fa-search"></i>
                             </a>
+                            <a href="{{ route('controlpeso') }}" role="menuitem"
+                                class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
+                                Control Peso&nbsp;&nbsp;&nbsp;<i
+                                    class="fa-solid fa-warehouse"></i>&nbsp;&nbsp;&nbsp;<i
+                                    class="fa-solid fa-search"></i>
+                            </a>
                         </div>
                     </div>
                     {{-- boton tareas --}}
@@ -618,10 +624,7 @@
                                 class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
                                 Tareas Planificadas&nbsp;&nbsp;&nbsp;<i class="fa-regular fa-calendar-days"></i>
                             </a>
-                            <a href="{{ route('Tareas.finalizadas') }}" role="menuitem"
-                                class="block p-2 text-sm transition-colors duration-200 rounded-md text-gray-100 hover:text-orange-400">
-                                Tareas Realizadas&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-calendar-check"></i></i>
-                            </a>
+                           
                         </div>
                     </div>
                     {{-- boton tareas --}}
